@@ -5,14 +5,14 @@ import 'movie_card.dart';
 class MovieHorizontalList extends StatelessWidget {
   final String title;
   final List<Movie> movies;
-  const MovieHorizontalList({@required this.title, @required this.movies});
+  MovieHorizontalList({@required this.title, @required this.movies});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -30,6 +30,8 @@ class MovieHorizontalList extends StatelessWidget {
         Container(
           height: 280,
           child: ListView.builder(
+            padding: EdgeInsets.only(left: 12.0),
+            addAutomaticKeepAlives: false,
             scrollDirection: Axis.horizontal,
             itemCount: 10,
             itemBuilder: (ctx, i) => MovieCard(),

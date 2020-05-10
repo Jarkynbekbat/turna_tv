@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:turna_tv/data/models/movie.dart';
+import 'package:turna_tv/presentation/screens/movie_detail_screen/movie_detail_screen.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -11,10 +12,16 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      width: 160,
+      width: 130,
       child: GestureDetector(
         onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MovieDetailScreen(
+                movie: movie,
+              ),
+            ),
+          );
           // Navigator.of(context).pushNamed(
           //   MovieDetailsScreen.routeName,
           //   arguments: {
@@ -35,7 +42,7 @@ class MovieCard extends StatelessWidget {
               child: Hero(
                 tag: Random.secure(),
                 child: Container(
-                  height: 200,
+                  height: 180,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     image: DecorationImage(

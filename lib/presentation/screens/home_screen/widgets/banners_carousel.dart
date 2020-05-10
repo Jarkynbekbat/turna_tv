@@ -16,10 +16,10 @@ class BannersCarousel extends StatelessWidget {
         MovieBanner(),
       ],
       options: CarouselOptions(
-        aspectRatio: 2.0,
-        enlargeCenterPage: true,
+        viewportFraction: 0.93,
+        // enlargeCenterPage: true,
         autoPlay: true,
-        height: 250.0,
+        height: MediaQuery.of(context).size.height * 0.3,
       ),
     );
   }
