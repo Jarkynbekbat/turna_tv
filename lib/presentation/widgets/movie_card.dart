@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:turna_tv/data/models/movie.dart';
@@ -22,18 +23,6 @@ class MovieCard extends StatelessWidget {
               ),
             ),
           );
-          // Navigator.of(context).pushNamed(
-          //   MovieDetailsScreen.routeName,
-          //   arguments: {
-          //     'id': movieList[index].id,
-          //     'title': movieList[index].title,
-          //     'imageUrl': movieList[index].imageUrl,
-          //     'description': movieList[index].description,
-          //     'rating': movieList[index].rating,
-          //     'year': movieList[index].year,
-          //     'duration': movieList[index].duration,
-          //   },
-          // );
         },
         child: Column(
           children: <Widget>[
@@ -41,15 +30,17 @@ class MovieCard extends StatelessWidget {
               elevation: 10,
               child: Hero(
                 tag: Random.secure(),
-                child: Container(
-                  height: 180,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                          "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"),
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: CachedNetworkImage(
+                    height: 180.0,
+                    imageUrl:
+                        "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
               ),

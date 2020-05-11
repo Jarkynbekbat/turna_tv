@@ -4,6 +4,7 @@ import 'package:better_player/better_player.dart';
 import '../../../data/models/movie.dart';
 import 'widgets/movie_detail_header.dart';
 import 'widgets/photo_scroller.dart';
+import 'widgets/play_button.dart';
 import 'widgets/story_line.dart';
 
 class MovieDetailScreen extends StatefulWidget {
@@ -47,6 +48,24 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             MovieDetailHeader(widget.movie),
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0, top: 12.0),
+              child: Row(
+                children: <Widget>[
+                  PlayButton(
+                    icon: Icon(Icons.play_arrow),
+                    title: 'Смотреть',
+                    onTab: () {},
+                  ),
+                  SizedBox(width: 12.0),
+                  PlayButton(
+                    icon: Icon(Icons.local_movies),
+                    title: 'Трейлер',
+                    onTab: () {},
+                  )
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Storyline(
@@ -96,34 +115,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           ],
         ),
       ),
-      // floatingActionButton: UnicornDialer(
-      //   backgroundColor: Colors.black.withOpacity(0.5),
-      //   orientation: UnicornOrientation.VERTICAL,
-      //   parentButton: Icon(Icons.play_arrow),
-      //   hasNotch: false,
-      //   childButtons: [
-      //     UnicornButton(
-      //       hasLabel: true,
-      //       labelText: "Трейлер",
-      //       currentButton: FloatingActionButton(
-      //         heroTag: "trailer",
-      //         mini: true,
-      //         child: Icon(Icons.play_arrow),
-      //         onPressed: () {},
-      //       ),
-      //     ),
-      //     UnicornButton(
-      //       hasLabel: true,
-      //       labelText: "Фильм",
-      //       currentButton: FloatingActionButton(
-      //         heroTag: "movie",
-      //         mini: true,
-      //         child: Icon(Icons.play_arrow),
-      //         onPressed: () {},
-      //       ),
-      //     )
-      //   ],
-      // ),
     );
   }
 }
