@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import 'package:turna_tv/data/repositories/repository.dart';
+import '../../data/models/home.dart';
+import '../../data/repositories/repository.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -19,6 +20,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if (event is FetchHomeScreenData) yield* _fetchToState();
+  }
+
+  _fetchToState() async* {
+    yield HomeLoading();
+    try {
+      await _repository.initAll();
+      yield HomeLoaded(model: HomeScreenModel(movies: _repository.movies));
+    } catch (e) {
+      yield HomeError(error: e);
+    }
   }
 }

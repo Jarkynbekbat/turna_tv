@@ -4,3 +4,15 @@ part of 'home_bloc.dart';
 abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
+
+class HomeLoading extends HomeState {}
+
+class HomeLoaded extends HomeState {
+  final HomeScreenModel model;
+  HomeLoaded({@required this.model});
+}
+
+class HomeError extends HomeState {
+  final Error error;
+  HomeError({@required this.error});
+}
