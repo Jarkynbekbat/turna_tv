@@ -9,13 +9,17 @@ class BannersCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: List.generate(movies.length, (i) => MovieBanner(movie: movies[i])),
-      options: CarouselOptions(
-        viewportFraction: 0.93,
-        // enlargeCenterPage: true,
-        autoPlay: true,
-        height: MediaQuery.of(context).size.height * 0.3,
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: CarouselSlider(
+        items:
+            List.generate(movies.length, (i) => MovieBanner(movie: movies[i])),
+        options: CarouselOptions(
+          viewportFraction: 0.93,
+          // enlargeCenterPage: true,
+          autoPlay: true,
+          height: MediaQuery.of(context).size.height * 0.3,
+        ),
       ),
     );
   }

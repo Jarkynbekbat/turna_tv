@@ -17,4 +17,8 @@ class HomeScreenModel {
   List<Movie> getMoviesForSlider() {
     return this.movies;
   }
+
+  List<Movie> getMoviesForChildren() {
+    return this.movies.where((m) => m.isForChildren()).toList();
+  }
 }

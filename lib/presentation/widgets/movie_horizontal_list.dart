@@ -28,7 +28,7 @@ class MovieHorizontalList extends StatelessWidget {
           ),
         ),
         Container(
-          height: 280,
+          height: 220,
           child: ListView.builder(
             padding: EdgeInsets.only(left: 12.0),
             addAutomaticKeepAlives: false,

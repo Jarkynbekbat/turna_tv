@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:line_awesome_icons/line_awesome_icons.dart';
-import 'package:turna_tv/blocs/home_bloc/home_bloc.dart';
-import 'package:turna_tv/presentation/widgets/loading_screen.dart';
+import 'package:turna_tv/presentation/screens/main_screen/widgets/my_sliver_app_bar.dart';
 
+import '../../../blocs/home_bloc/home_bloc.dart';
+import '../../widgets/loading_screen.dart';
 import '../../widgets/movie_horizontal_list.dart';
 import 'widgets/banners_carousel.dart';
 
@@ -38,25 +37,54 @@ class _HomeScreenState extends State<HomeScreen> {
     return Center(child: Text(state.error.toString()));
   }
 
-  Card _buildLoaded(HomeLoaded state) {
-    return Card(
-      child: ListView(
-        children: <Widget>[
-          SizedBox(height: 12.0),
-          BannersCarousel(
-            movies: state.model.getMoviesForSlider(),
+  Container _buildLoaded(HomeLoaded state) {
+    return Container(
+      child: CustomScrollView(
+        slivers: <Widget>[
+          MySliberAppBAr(
+            height: MediaQuery.of(context).size.width * 0.6,
+            flexibleSpace: BannersCarousel(
+              movies: state.model.getMoviesForSlider(),
+            ),
           ),
-          MovieHorizontalList(
-            title: 'Новинки',
-            movies: state.model.getNewMovies(),
-          ),
-          MovieHorizontalList(
-            title: 'Рекомендванные',
-            movies: state.model.getRecomendedMovies(),
+          SliverFixedExtentList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return MovieHorizontalList(
+                  title: 'Новинки',
+                  movies: state.model.getNewMovies(),
+                );
+              },
+              childCount: 3,
+            ),
+            itemExtent: 303,
           ),
         ],
       ),
     );
+
+    // Card(
+    //   child: ListView(
+    //     children: <Widget>[
+    //       SizedBox(height: 12.0),
+    //       BannersCarousel(
+    //         movies: state.model.getMoviesForSlider(),
+    //       ),
+    // MovieHorizontalList(
+    //   title: 'Новинки',
+    //   movies: state.model.getNewMovies(),
+    // ),
+    //       MovieHorizontalList(
+    //         title: 'Рекомендванные',
+    //         movies: state.model.getRecomendedMovies(),
+    //       ),
+    //       MovieHorizontalList(
+    //         title: 'Детям',
+    //         movies: state.model.getMoviesForChildren(),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 
   void _listenInitial(BuildContext context) {

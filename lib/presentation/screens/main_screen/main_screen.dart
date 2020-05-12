@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turna_tv/presentation/screens/home_screen/home_screen.dart';
 
 import '../../widgets/bottom_navigation.dart';
+import 'widgets/my_sliver_app_bar.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -20,9 +21,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('TurnaTV'),
-      ),
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigation(
           currentIndex: _currentIndex,
@@ -34,5 +32,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-class AuthBloc {}

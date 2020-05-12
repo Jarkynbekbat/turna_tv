@@ -38,6 +38,14 @@ class Movie {
 
   bool isNew() => this.year == DateTime.now().year ? true : false;
 
+  bool isForChildren() {
+    if (this.age != "Выберите возраст") {
+      int age = int.parse(this.age);
+      return age <= 12 ? true : false;
+    } else
+      return false;
+  }
+
   Movie.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     producer = json['producer'];

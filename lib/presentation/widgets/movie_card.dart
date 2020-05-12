@@ -16,6 +16,7 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 180.0,
       width: 130,
       child: GestureDetector(
         onTap: () {
@@ -46,17 +47,17 @@ class MovieCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Avengers: Endgame",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Text(
+            //   movie.title,
+            //   style: TextStyle(
+            //     fontSize: 16,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            //   textAlign: TextAlign.center,
+            // ),
           ],
         ),
       ),
