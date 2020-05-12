@@ -33,8 +33,8 @@ class MovieHorizontalList extends StatelessWidget {
             padding: EdgeInsets.only(left: 12.0),
             addAutomaticKeepAlives: false,
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (ctx, i) => MovieCard(),
+            itemCount: movies.length,
+            itemBuilder: (ctx, i) => MovieCard(movie: movies[i]),
           ),
         )
       ],

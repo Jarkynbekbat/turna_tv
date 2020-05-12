@@ -10,11 +10,7 @@ class BannersCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      items: [
-        MovieBanner(),
-        MovieBanner(),
-        MovieBanner(),
-      ],
+      items: List.generate(movies.length, (i) => MovieBanner(movie: movies[i])),
       options: CarouselOptions(
         viewportFraction: 0.93,
         // enlargeCenterPage: true,

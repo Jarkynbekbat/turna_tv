@@ -7,6 +7,11 @@ class Repository {
   List<Movie> movies = [];
 
   Future<bool> initAll() async {
-    var raws = _movieProvider.getAll();
+    var raws = await _movieProvider.getAll();
+
+    for (var raw in raws) {
+      this.movies.add(Movie.fromJson(raw));
+    }
+    print('object');
   }
 }

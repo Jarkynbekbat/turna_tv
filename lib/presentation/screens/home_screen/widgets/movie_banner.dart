@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:turna_tv/data/models/movie.dart';
+import 'package:turna_tv/data/providers/services/api_service.dart';
 import 'package:turna_tv/presentation/screens/movie_detail_screen/movie_detail_screen.dart';
+import 'package:turna_tv/presentation/widgets/card_loading.dart';
 
 class MovieBanner extends StatelessWidget {
   final Movie movie;
@@ -25,10 +28,13 @@ class MovieBanner extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: Stack(
             children: <Widget>[
-              Image.network(
-                "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
-                fit: BoxFit.cover,
+              CachedNetworkImage(
+                fit: BoxFit.fill,
                 width: 1400.0,
+                imageUrl: ApiService.imgBase + movie.bigImgUrl,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    cardLoading(context, url, downloadProgress),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
               Positioned(
                 bottom: 0.0,
@@ -48,7 +54,7 @@ class MovieBanner extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: Text(
-                    'Название фильма',
+                    movie.title,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,

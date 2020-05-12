@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import '../../video_player_screen/video_player.dart';
 
 class PlayButton extends StatelessWidget {
   final String title;
+  final String movieTitle;
   final Icon icon;
-  final Function onTab;
+  final String url;
 
   const PlayButton({
+    @required this.movieTitle,
     @required this.title,
     @required this.icon,
-    @required this.onTab,
+    @required this.url,
   });
 
   @override
@@ -21,7 +24,13 @@ class PlayButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[icon, Text(title)],
         ),
-        onPressed: onTab,
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => VideoPlayerPage(title: movieTitle, url: url),
+          ));
+
+          print(url);
+        },
       ),
     );
   }

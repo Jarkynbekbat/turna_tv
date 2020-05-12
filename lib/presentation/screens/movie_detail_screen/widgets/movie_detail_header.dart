@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turna_tv/data/providers/services/api_service.dart';
 
 import '../../../../data/models/movie.dart';
 import 'acr_bunner_image.dart';
@@ -29,12 +30,13 @@ class MovieDetailHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "название",
+          movie.title,
           style: textTheme.title,
         ),
         SizedBox(height: 8.0),
+        Text('год: ${movie.year}, ${movie.age}'),
         // RatingInformation(movie),
-        SizedBox(height: 12.0),
+        SizedBox(height: 8.0),
         Row(children: _buildCategoryChips(textTheme)),
       ],
     );
@@ -43,8 +45,7 @@ class MovieDetailHeader extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 140.0),
-          child: ArcBannerImage(
-              "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"),
+          child: ArcBannerImage(ApiService.imgBase + movie.bigImgUrl),
         ),
         Positioned(
           bottom: 0.0,
@@ -55,7 +56,7 @@ class MovieDetailHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Poster(
-                "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
+                ApiService.imgBase + movie.smallImgUrl,
                 height: 180.0,
               ),
               SizedBox(width: 16.0),

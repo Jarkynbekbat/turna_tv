@@ -6,7 +6,7 @@ class Movie {
   String language;
   String duration;
   String age;
-  String year;
+  int year;
   String categoryId;
   String categoryName;
   String genreId;
@@ -15,7 +15,7 @@ class Movie {
   String bigImgUrl;
   String trailerUrl;
   String movieUrl;
-  Null screenImg;
+  List<dynamic> screenImg = [];
 
   Movie(
       {this.title,
@@ -36,6 +36,8 @@ class Movie {
       this.movieUrl,
       this.screenImg});
 
+  bool isNew() => this.year == DateTime.now().year ? true : false;
+
   Movie.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     producer = json['producer'];
@@ -44,7 +46,7 @@ class Movie {
     language = json['language'];
     duration = json['duration'];
     age = json['age'];
-    year = json['year'];
+    year = int.parse(json['year']);
     categoryId = json['categoryId'];
     categoryName = json['categoryName'];
     genreId = json['genreId'];
@@ -53,7 +55,14 @@ class Movie {
     bigImgUrl = json['bigImgUrl'];
     trailerUrl = json['trailerUrl'];
     movieUrl = json['movieUrl'];
-    screenImg = json['screenImg'];
+
+    if (json['screenImg'] != null) {
+      json['screenImg'].forEach((v) {
+        screenImg.add(v.toString());
+      });
+    } else {
+      screenImg = [];
+    }
   }
 
   Map<String, dynamic> toJson() {

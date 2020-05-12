@@ -23,12 +23,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is FetchHomeScreenData) yield* _fetchToState();
   }
 
-  _fetchToState() async* {
+  Stream<HomeState> _fetchToState() async* {
     yield HomeLoading();
     try {
       await _repository.initAll();
+      print('object');
+
       yield HomeLoaded(model: HomeScreenModel(movies: _repository.movies));
     } catch (e) {
+      print('object');
       yield HomeError(error: e);
     }
   }

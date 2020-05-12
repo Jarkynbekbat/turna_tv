@@ -7,7 +7,7 @@ class HomeScreenModel {
   HomeScreenModel({@required this.movies});
 
   List<Movie> getNewMovies() {
-    return this.movies;
+    return this.movies.where((m) => m.isNew()).toList();
   }
 
   List<Movie> getRecomendedMovies() {

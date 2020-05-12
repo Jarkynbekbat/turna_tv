@@ -20,9 +20,10 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   line_awesome_icons: ^1.0.4+2
   unicorndial: ^1.1.5
-  better_player: ^0.0.8
+  # better_player: ^0.0.8
   http: ^0.12.1
   cached_network_image: ^2.2.0+1
+  video_player: ^0.10.0+4
 
 dev_dependencies:
   flutter_test:

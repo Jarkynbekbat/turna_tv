@@ -16,6 +16,7 @@ class _MainScreenState extends State<MainScreen> {
     Text('Профиль'),
   ];
   int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

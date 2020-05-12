@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:turna_tv/presentation/widgets/card_loading.dart';
 
 class ArcBannerImage extends StatelessWidget {
   ArcBannerImage(this.imageUrl);
@@ -10,11 +12,14 @@ class ArcBannerImage extends StatelessWidget {
 
     return ClipPath(
       clipper: ArcClipper(),
-      child: Image.network(
-        imageUrl,
-        width: screenWidth,
-        height: 230.0,
+      child: CachedNetworkImage(
         fit: BoxFit.cover,
+        width: MediaQuery.of(context).size.width,
+        height: 230.0,
+        imageUrl: imageUrl,
+        progressIndicatorBuilder: (context, url, downloadProgress) =>
+            cardLoading(context, url, downloadProgress),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
   }

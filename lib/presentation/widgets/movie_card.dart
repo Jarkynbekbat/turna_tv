@@ -4,7 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:turna_tv/data/models/movie.dart';
+import 'package:turna_tv/data/providers/services/api_service.dart';
 import 'package:turna_tv/presentation/screens/movie_detail_screen/movie_detail_screen.dart';
+
+import 'card_loading.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -34,12 +37,10 @@ class MovieCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   child: CachedNetworkImage(
                     height: 180.0,
-                    imageUrl:
-                        "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
+                    imageUrl: ApiService.imgBase + movie.smallImgUrl,
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
+                            cardLoading(context, url, downloadProgress),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
