@@ -1,17 +1,22 @@
-import 'package:turna_tv/data/models/movie.dart';
-import 'package:turna_tv/data/providers/movie_provider.dart';
+import '../models/item_models/category.dart';
+import '../models/item_models/genre.dart';
+import '../models/item_models/movie.dart';
+import '../providers/category_provider.dart';
+import '../providers/genre_provider.dart';
+import '../providers/movie_provider.dart';
 
 class Repository {
   MovieProvider _movieProvider = MovieProvider();
+  CategoryProvider _categoryProvider = CategoryProvider();
+  GenreProvider _genreProvider = GenreProvider();
 
   List<Movie> movies = [];
+  List<Category> categories = [];
+  List<Genre> genres = [];
 
   Future<bool> initAll() async {
-    var raws = await _movieProvider.getAll();
-
-    for (var raw in raws) {
-      this.movies.add(Movie.fromJson(raw));
-    }
-    print('object');
+    this.movies = await _movieProvider.getAll();
+    this.categories = await _categoryProvider.getAll();
+    this.genres = await _genreProvider.getAll();
   }
 }

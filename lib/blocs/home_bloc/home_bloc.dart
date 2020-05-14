@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../data/models/home.dart';
+import '../../data/models/screen_models/home.dart';
 import '../../data/repositories/repository.dart';
 
 part 'home_event.dart';
