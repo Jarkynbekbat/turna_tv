@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../data/models/item_models/movie.dart';
 import '../../../../data/providers/services/api_service.dart';
-import '../../../widgets/card_loading.dart';
 import '../../movie_detail_screen/movie_detail_screen.dart';
 
 class MovieBanner extends StatelessWidget {
@@ -30,11 +29,12 @@ class MovieBanner extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               CachedNetworkImage(
+                placeholderFadeInDuration: Duration(milliseconds: 500),
                 fit: BoxFit.fill,
                 width: 1400.0,
                 imageUrl: ApiService.imgBase + movie.bigImgUrl,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    cardLoading(context, url, downloadProgress),
+                // progressIndicatorBuilder: (context, url, downloadProgress) =>
+
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
               Positioned(

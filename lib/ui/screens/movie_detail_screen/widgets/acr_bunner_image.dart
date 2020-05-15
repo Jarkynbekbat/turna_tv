@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../ui/widgets/card_loading.dart';
-
 class ArcBannerImage extends StatelessWidget {
   ArcBannerImage(this.imageUrl);
   final String imageUrl;
@@ -17,7 +15,7 @@ class ArcBannerImage extends StatelessWidget {
         height: 230.0,
         imageUrl: imageUrl,
         progressIndicatorBuilder: (context, url, downloadProgress) =>
-            cardLoading(context, url, downloadProgress),
+            CircularProgressIndicator(),
         errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );

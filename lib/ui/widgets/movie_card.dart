@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../../data/models/item_models/movie.dart';
 import '../../data/providers/services/api_service.dart';
 import '../screens/movie_detail_screen/movie_detail_screen.dart';
-import 'card_loading.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -38,9 +37,9 @@ class MovieCard extends StatelessWidget {
                   child: CachedNetworkImage(
                     height: 180.0,
                     imageUrl: ApiService.imgBase + movie.smallImgUrl,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            cardLoading(context, url, downloadProgress),
+                    // progressIndicatorBuilder:
+                    //     (context, url, downloadProgress) =>
+                    //       ,
                     errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),

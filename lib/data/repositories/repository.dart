@@ -18,5 +18,6 @@ class Repository {
     this.movies = await _movieProvider.getAll();
     this.categories = await _categoryProvider.getAll();
     this.genres = await _genreProvider.getAll();
+    return true;
   }
 }

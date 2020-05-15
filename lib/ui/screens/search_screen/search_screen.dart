@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/search_bloc/search_bloc.dart';
 import '../../../data/models/item_models/movie.dart';
 import '../../widgets/error_screen.dart';
-import '../../widgets/loading_screen.dart';
+import '../../widgets/screen_loading.dart';
 import '../../widgets/movie_card.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
         if (state is SearchInitial) _listenInitial(context);
         if (state is SearchLoaded) return _buildLoaded(state);
         if (state is SearchError) return ErrorScreen(state.error.toString());
-        return LoadingScreen();
+        return ScreenLoading();
       },
     );
   }

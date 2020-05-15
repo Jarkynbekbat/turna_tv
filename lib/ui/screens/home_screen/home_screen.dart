@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:turna_tv/ui/widgets/error_screen.dart';
 
 import '../../../blocs/home_bloc/home_bloc.dart';
-import '../../widgets/loading_screen.dart';
+import '../../widgets/error_screen.dart';
 import '../../widgets/movie_horizontal_list.dart';
+import '../../widgets/screen_loading.dart';
 import 'widgets/banners_carousel.dart';
 import 'widgets/my_sliver_app_bar.dart';
 
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (state is HomeInitial) _listenInitial(context);
         if (state is HomeLoaded) return _buildLoaded(state);
         if (state is HomeError) return ErrorScreen(state.error.toString());
-        return LoadingScreen();
+        return ScreenLoading();
       },
     );
   }

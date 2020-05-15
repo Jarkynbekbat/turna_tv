@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:turna_tv/ui/widgets/error_screen.dart';
 
 import '../../../blocs/category_bloc/category_bloc.dart';
 import '../../widgets/app_bar_title.dart';
-import '../../widgets/loading_screen.dart';
+import '../../widgets/error_screen.dart';
 import '../../widgets/movie_card.dart';
+import '../../widgets/screen_loading.dart';
 import 'widgets/genre_choice_chips.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         if (state is CategoryInitial) _listenInitial(context);
         if (state is CategoryLoaded) return _buildLoaded(state);
         if (state is CategoryError) return ErrorScreen(state.error.toString());
-        return LoadingScreen();
+        return ScreenLoading();
       },
     );
   }

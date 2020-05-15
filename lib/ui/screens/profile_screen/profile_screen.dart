@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../auth_screen/auth_screen.dart';
+import 'widgets/grid_button.dart';
+
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,17 +12,6 @@ class ProfileScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 10.0),
-          FlatButton(
-            color: Theme.of(context).accentColor,
-            onPressed: () {},
-            child: Text(
-              'Войти или зарегистрироваться',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           SizedBox(height: 20.0),
           Container(
             width: double.infinity,
@@ -44,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 10.0),
           Container(
             width: double.infinity,
             color: Colors.grey,
@@ -71,99 +63,51 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: 20.0),
           Row(
             children: <Widget>[
-              Expanded(
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Colors.grey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.turned_in_not,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Смотреть позже',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              GridButton(
+                title: 'Смотреть позже',
+                iconData: Icons.turned_in_not,
+                onClick: () {},
               ),
               SizedBox(width: 10.0),
-              Expanded(
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Colors.grey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.access_time,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Просмотры',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              GridButton(
+                title: 'Просмотры',
+                iconData: Icons.access_time,
+                onClick: () {},
               ),
             ],
           ),
           SizedBox(height: 10.0),
           Row(
             children: <Widget>[
-              Expanded(
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Colors.grey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.help,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Помощь',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              GridButton(
+                title: 'Помощь',
+                iconData: Icons.help,
+                onClick: () {},
               ),
               SizedBox(width: 10.0),
-              Expanded(
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Colors.grey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.info,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'О нас',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              GridButton(
+                title: 'О нас',
+                iconData: Icons.info,
+                onClick: () {},
               ),
             ],
-          )
+          ),
+          SizedBox(height: 20.0),
+          Center(
+            child: FlatButton(
+              color: Theme.of(context).accentColor,
+              onPressed: () {
+                Navigator.of(context).pushNamed(AuthScreen.route);
+              },
+              child: Text(
+                'Войти или зарегистрироваться',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
