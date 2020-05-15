@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turna_tv/ui/screens/movie_grid_screen/movie_grid_screen.dart';
 
 import '../../data/models/item_models/movie.dart';
 import 'movie_card.dart';
@@ -24,7 +25,16 @@ class MovieHorizontalList extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              IconButton(icon: Icon(Icons.arrow_forward), onPressed: () {})
+              IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MovieGridScreen(title: title, movies: movies),
+                      ),
+                    );
+                  })
             ],
           ),
         ),

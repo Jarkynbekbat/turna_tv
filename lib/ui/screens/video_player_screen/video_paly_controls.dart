@@ -39,7 +39,7 @@ class _VideoPlayControlsState extends State<VideoPlayControls> {
               width: 30,
               height: 30,
               child: Image.asset(
-                "./lib/presentation/assets/icons/rew_15_normal.png",
+                "assets/icons/rew_15_normal.png",
                 fit: BoxFit.fill,
               ),
             ),
@@ -52,7 +52,7 @@ class _VideoPlayControlsState extends State<VideoPlayControls> {
               width: 50,
               height: 50,
               child: Image.asset(
-                "./lib/presentation/assets/icons/${playing ? "pause_normal.png" : "play_large_normal.png"}",
+                "assets/icons/${playing ? "pause_normal.png" : "play_large_normal.png"}",
                 fit: BoxFit.fill,
               ),
             ),
@@ -65,7 +65,7 @@ class _VideoPlayControlsState extends State<VideoPlayControls> {
               width: 30,
               height: 30,
               child: Image.asset(
-                "./lib/presentation/assets/icons/fwd_15_normal.png",
+                "assets/icons/fwd_15_normal.png",
                 fit: BoxFit.fill,
               ),
             ),

@@ -1,11 +1,11 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/scaled_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../blocs/search_bloc/search_bloc.dart';
+import '../../../data/models/item_models/movie.dart';
 import '../../widgets/error_screen.dart';
 import '../../widgets/loading_screen.dart';
-import '../../../data/models/item_models/movie.dart';
 import '../../widgets/movie_card.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -16,10 +16,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final SearchBarController<Movie> _searchBarController = SearchBarController();
   bool isReplay = false;
-
-  Future<List<Movie>> _search(String text, List<Movie> movies) async {
-    return movies;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,22 +40,56 @@ class _SearchScreenState extends State<SearchScreen> {
         headerPadding: EdgeInsets.symmetric(horizontal: 10),
         listPadding: EdgeInsets.symmetric(horizontal: 10),
         onSearch: (title) => _search(title, state.model.movies),
+        hintText: "название фильма",
         searchBarController: _searchBarController,
-        placeHolder: Text("placeholder"),
-        cancellationWidget: Text("Cancel"),
-        emptyWidget: Text("empty"),
-        indexedScaledTileBuilder: (int index) =>
-            ScaledTile.count(1, index.isEven ? 2 : 1),
+        // placeHolder: Placeholder(),
+        cancellationWidget: Text("Отмена"),
+        emptyWidget: Text("Не найдено"),
         onCancelled: () {
           print("Cancelled triggered");
         },
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        crossAxisCount: 2,
-        onItemFound: (Movie movie, int index) {
-          return MovieCard(movie: movie);
-        },
+        minimumChars: 1,
+        crossAxisSpacing: 1,
+        crossAxisCount: 3,
+        onItemFound: _buildFoundItem,
       ),
     );
+  }
+
+  Widget _buildFoundItem(Movie movie, int index) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 188,
+            child: MovieCard(movie: movie),
+          ),
+          SizedBox(height: 10),
+          Text(
+            movie.title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<List<Movie>> _search(String text, List<Movie> movies) async {
+    text = text.toLowerCase();
+    if (text.length == 1) {
+      return movies.where((el) => el.title.toLowerCase()[0] == text).toList();
+    }
+    if (text.length == 2) {
+      return movies
+          .where((el) =>
+              el.title.toLowerCase()[0] == text[0] &&
+              el.title.toLowerCase()[1] == text[1])
+          .toList();
+    }
+    return movies.where((el) => el.title.toLowerCase().contains(text)).toList();
   }
 }

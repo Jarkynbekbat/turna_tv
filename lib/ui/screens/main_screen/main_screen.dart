@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turna_tv/ui/screens/profile_screen/profile_screen.dart';
 
 import '../../widgets/bottom_navigation.dart';
 import '../category_screen/category_screen.dart';
@@ -15,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     CategoryScreen(),
     SearchScreen(),
-    Text('Профиль'),
+    ProfileScreen(),
   ];
   int _currentIndex = 0;
 

@@ -40,8 +40,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   void initState() {
-    widget.url =
-        "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_30MB.mp4";
+    widget.url = "https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8";
 
     super.initState();
     _statusBarEnable(false);
