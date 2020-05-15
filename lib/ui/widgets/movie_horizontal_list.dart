@@ -18,13 +18,7 @@ class MovieHorizontalList extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text(title),
               IconButton(
                   icon: Icon(Icons.arrow_forward),
                   onPressed: () {
@@ -39,7 +33,7 @@ class MovieHorizontalList extends StatelessWidget {
           ),
         ),
         Container(
-          height: 200,
+          height: 180.0,
           child: ListView.builder(
             padding: EdgeInsets.only(left: 12.0),
             addAutomaticKeepAlives: false,

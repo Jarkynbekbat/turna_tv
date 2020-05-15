@@ -8,14 +8,12 @@ class Storyline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Описание',
-          style: textTheme.subhead.copyWith(fontSize: 18.0),
+          style: Theme.of(context).textTheme.bodyText2,
         ),
         SizedBox(height: 8.0),
 
@@ -24,7 +22,6 @@ class Storyline extends StatelessWidget {
           style: {
             "p": Style(
               fontSize: FontSize.large,
-              color: Colors.black45,
             ),
           },
         ),

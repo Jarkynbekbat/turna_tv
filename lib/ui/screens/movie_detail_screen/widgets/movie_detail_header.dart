@@ -31,10 +31,13 @@ class MovieDetailHeader extends StatelessWidget {
       children: [
         Text(
           movie.title,
-          style: textTheme.title,
+          style: textTheme.bodyText2,
         ),
         SizedBox(height: 8.0),
-        Text('год: ${movie.year}, ${movie.age}'),
+        Text(
+          'год: ${movie.year}, ${movie.age}',
+          style: textTheme.bodyText2.copyWith(fontSize: 16.0),
+        ),
         // RatingInformation(movie),
         SizedBox(height: 8.0),
         Row(children: _buildCategoryChips(textTheme)),

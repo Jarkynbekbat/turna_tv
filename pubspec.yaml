@@ -15,9 +15,9 @@ dependencies:
   loading_animations: "^2.1.0"
   flutter_bloc: ^4.0.0
   carousel_slider: ^2.1.0
-  google_nav_bar: ^2.2.0
-  font_awesome_flutter: ^8.8.1
-  line_awesome_icons: ^1.0.4+2
+  # google_nav_bar: ^2.2.0
+  # font_awesome_flutter: ^8.8.1
+  # line_awesome_icons: ^1.0.4+2
   unicorndial: ^1.1.5
   # better_player: ^0.0.8
   http: ^0.12.1
@@ -27,7 +27,7 @@ dependencies:
   flutter_html: ^1.0.0
   flappy_search_bar: ^1.7.2
   flutter_signin_button: ^1.0.0
-  # google_fonts: ^1.1.0
+  google_fonts: ^1.1.0
 
 dev_dependencies:
   flutter_test:

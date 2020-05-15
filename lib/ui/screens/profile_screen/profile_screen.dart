@@ -95,7 +95,6 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: 20.0),
           Center(
             child: FlatButton(
-              color: Theme.of(context).accentColor,
               onPressed: () {
                 Navigator.of(context).pushNamed(AuthScreen.route);
               },

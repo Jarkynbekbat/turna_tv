@@ -14,18 +14,14 @@ class GenreChoiceChips extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 12.0),
-      height: 50.0,
-      child: ChipsChoice<String>.single(
-        value: value,
-        options: ChipsChoiceOption.listFrom<String, String>(
-          source: options,
-          value: (i, v) => v,
-          label: (i, v) => v,
-        ),
-        onChanged: (val) {},
+    return ChipsChoice<String>.single(
+      value: value,
+      options: ChipsChoiceOption.listFrom<String, String>(
+        source: options,
+        value: (i, v) => v,
+        label: (i, v) => v,
       ),
+      onChanged: (val) {},
     );
   }
 

@@ -70,9 +70,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         Container(
           height: 450,
           child: GridView.count(
-            padding: EdgeInsets.all(12.0),
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
             crossAxisCount: 3,
-            childAspectRatio: 1 / 1.5,
+            childAspectRatio: 0.95 / 1.4,
             children: List.generate(
               movies.length,
               (i) {

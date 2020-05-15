@@ -18,46 +18,48 @@ class _AuthScreenState extends State<AuthScreen> {
       appBar: AppBar(
         title: Text('Вход или регистрация'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(22.0),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 100.0),
-            Text('Войдите или зарегистрируйтесь'),
-            Text('чтобы воcпользоватся сервисом на любом устройстве'),
-            SizedBox(height: 20.0),
-            SignInButton(
-              Buttons.GoogleDark,
-              text: 'через google аккаунт',
-              onPressed: () {},
-            ),
-            SignInButton(
-              Buttons.Facebook,
-              text: 'через facebook аккаунт',
-              onPressed: () {},
-            ),
-            Text('или'),
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(
-                labelText: "через email или телефон",
-              ),
-            ),
-            SizedBox(height: 20.0),
-            SizedBox(
-              width: double.infinity,
-              child: FlatButton(
-                color: Theme.of(context).accentColor,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(22.0),
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 100.0),
+              Text('Войдите или зарегистрируйтесь'),
+              Text('чтобы воcпользоватся сервисом на любом устройстве'),
+              SizedBox(height: 20.0),
+              SignInButton(
+                Buttons.GoogleDark,
+                text: 'через google аккаунт',
                 onPressed: () {},
-                child: Text(
-                  'Продолжить',
-                  style: TextStyle(
-                    color: Colors.white,
+              ),
+              SignInButton(
+                Buttons.Facebook,
+                text: 'через facebook аккаунт',
+                onPressed: () {},
+              ),
+              Text('или'),
+              TextField(
+                controller: _controller,
+                decoration: InputDecoration(
+                  labelText: "через email или телефон",
+                ),
+              ),
+              SizedBox(height: 20.0),
+              SizedBox(
+                width: double.infinity,
+                child: FlatButton(
+                  color: Theme.of(context).accentColor,
+                  onPressed: () {},
+                  child: Text(
+                    'Продолжить',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:first_time_screen/first_time_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'blocs/auth_bloc/auth_bloc.dart';
 import 'blocs/category_bloc/category_bloc.dart';
@@ -40,7 +41,35 @@ class App extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
-          // theme: ThemeData.dark(),
+          theme: ThemeData(
+            primaryColor: Color(0xff45046a),
+            backgroundColor: Color(0xff5c2a9d),
+            scaffoldBackgroundColor: Color(0xff5c2a9d),
+            textTheme: TextTheme(
+              bodyText1: TextStyle(
+                color: Colors.white.withOpacity(0.7),
+              ),
+              bodyText2: GoogleFonts.inter(
+                color: Colors.white.withOpacity(0.8),
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            iconTheme: IconThemeData(
+              color: Colors.white.withOpacity(0.8),
+            ),
+
+            // scaffoldBackgroundColor: Color(0xff5c2a9d),
+            // textTheme: TextTheme(
+            //   bodyText2: TextStyle(
+            //     color:
+            //         ThemeData.dark().textTheme.bodyText1.color.withOpacity(0.5),
+            //   ),
+            // ),
+            // appBarTheme: AppBarTheme(
+            //   color: Color(0xff45046a),
+            // ),
+          ),
           home: FirstTimeScreen(
             loadingScreen: ScreenLoading(),
             introScreen: MaterialPageRoute(

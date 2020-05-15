@@ -36,13 +36,13 @@ class _SearchScreenState extends State<SearchScreen> {
   SafeArea _buildLoaded(SearchLoaded state) {
     return SafeArea(
       child: SearchBar<Movie>(
-        searchBarPadding: EdgeInsets.symmetric(horizontal: 10),
+        searchBarPadding: EdgeInsets.symmetric(horizontal: 5),
         headerPadding: EdgeInsets.symmetric(horizontal: 10),
         listPadding: EdgeInsets.symmetric(horizontal: 10),
         onSearch: (title) => _search(title, state.model.movies),
         hintText: "название фильма",
         searchBarController: _searchBarController,
-        // placeHolder: Placeholder(),
+        // placeHolder:
         cancellationWidget: Text("Отмена"),
         emptyWidget: Text("Не найдено"),
         onCancelled: () {
