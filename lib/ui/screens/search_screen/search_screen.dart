@@ -36,6 +36,10 @@ class _SearchScreenState extends State<SearchScreen> {
   SafeArea _buildLoaded(SearchLoaded state) {
     return SafeArea(
       child: SearchBar<Movie>(
+        textStyle: Theme.of(context).textTheme.bodyText1,
+        iconActiveColor: Colors.white,
+        icon: Icon(Icons.search,
+            color: Theme.of(context).textTheme.bodyText2.color),
         searchBarPadding: EdgeInsets.symmetric(horizontal: 5),
         headerPadding: EdgeInsets.symmetric(horizontal: 10),
         listPadding: EdgeInsets.symmetric(horizontal: 10),

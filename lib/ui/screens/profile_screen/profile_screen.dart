@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turna_tv/ui/widgets/my_flat_button.dart';
 
 import '../auth_screen/auth_screen.dart';
 import 'widgets/grid_button.dart';
@@ -93,20 +94,10 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20.0),
-          Center(
-            child: FlatButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(AuthScreen.route);
-              },
-              child: Text(
-                'Войти или зарегистрироваться',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
+          MyFlatButton(
+            title: 'Войти или зарегистрироваться',
+            onClick: () => Navigator.of(context).pushNamed(AuthScreen.route),
+          )
         ],
       ),
     );

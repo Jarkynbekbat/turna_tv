@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:turna_tv/ui/screens/registration_screen/registration_screen.dart';
+import 'package:turna_tv/ui/widgets/my_flat_button.dart';
 
 class AuthScreen extends StatefulWidget {
   static String route = "auth";
@@ -24,8 +26,10 @@ class _AuthScreenState extends State<AuthScreen> {
           child: Column(
             children: <Widget>[
               SizedBox(height: 100.0),
-              Text('Войдите или зарегистрируйтесь'),
-              Text('чтобы воcпользоватся сервисом на любом устройстве'),
+              Text(
+                'Войдите или зарегистрируйтесь чтобы воcпользоватся сервисом на любом устройстве',
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 20.0),
               SignInButton(
                 Buttons.GoogleDark,
@@ -45,23 +49,20 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               SizedBox(height: 20.0),
-              SizedBox(
-                width: double.infinity,
-                child: FlatButton(
-                  color: Theme.of(context).accentColor,
-                  onPressed: () {},
-                  child: Text(
-                    'Продолжить',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              MyFlatButton(
+                title: 'Продолжить',
+                onClick: () => _onContinue(context),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _onContinue(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => RegistrationScreen(data: null, type: null),
+    ));
   }
 }

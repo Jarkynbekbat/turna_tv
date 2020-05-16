@@ -16,6 +16,10 @@ class BottomNavigation extends StatelessWidget {
       selectedItemColor: Colors.white,
       unselectedItemColor:
           Theme.of(context).textTheme.bodyText1.color.withOpacity(0.5),
+      selectedLabelStyle:
+          TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal),
+      unselectedLabelStyle:
+          TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal),
       type: BottomNavigationBarType.fixed,
       currentIndex: currentIndex,
       onTap: onSelect,

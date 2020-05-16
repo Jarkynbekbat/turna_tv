@@ -28,8 +28,6 @@ class PlayButton extends StatelessWidget {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => VideoPlayerPage(title: movieTitle, url: url),
           ));
-
-          print(url);
         },
       ),
     );

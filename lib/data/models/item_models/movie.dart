@@ -1,4 +1,5 @@
-import 'package:turna_tv/data/models/item_models/genre.dart';
+import 'actor.dart';
+import 'genre.dart';
 
 class Movie {
   String title;
@@ -11,13 +12,13 @@ class Movie {
   int year;
   int categoryId;
   String categoryName;
-  // List<dynamic> genreId;
   String smallImgUrl;
   String bigImgUrl;
   String trailerUrl;
   String movieUrl;
 
   List<Genre> genres = [];
+  List<Actor> actors = [];
   List<dynamic> screenImg = [];
 
   Movie({
