@@ -17,19 +17,24 @@ class PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 140.0,
-      child: FlatButton(
-        color: Theme.of(context).accentColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[icon, Text(title)],
-        ),
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => VideoPlayerPage(title: movieTitle, url: url),
-          ));
-        },
+      width: 200.0,
+      child: ListTile(
+        leading: icon,
+        title: Text(title),
       ),
+
+      // FlatButton(
+      //   color: Theme.of(context).accentColor,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: <Widget>[icon, Text(title),],
+      //   ),
+      //   onPressed: () {
+      //     Navigator.of(context).push(MaterialPageRoute(
+      //       builder: (context) => VideoPlayerPage(title: movieTitle, url: url),
+      //     ));
+      //   },
+      // ),
     );
   }
 }

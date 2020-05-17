@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turna_tv/ui/screens/information_screen/information_screen.dart';
 
 import '../../widgets/my_flat_button.dart';
+import '../information_screen/information_screen.dart';
 
 enum RegistrationType { phone, email, google, facebook }
 
@@ -19,52 +19,133 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Регистрация"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              'Для регистрации нам необходимо ваше согласие с правами и документами сервиса',
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 50.0),
-            ListTile(
-              leading: Icon(Icons.description),
-              title: Text(
-                'Политика конфиденциальности',
-                style: Theme.of(context).textTheme.bodyText2,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              Text(
+                'Для регистрации нам необходимо ваше согласие с правами и документами сервиса',
+                textAlign: TextAlign.center,
               ),
-              subtitle: Text(
-                'об использовании сервисом персональных данных',
+              SizedBox(height: 50.0),
+              ListTile(
+                leading: Icon(Icons.description),
+                title: Text(
+                  'Политика конфиденциальности',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                subtitle: Text(
+                  'об использовании сервисом персональных данных',
+                ),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () => _showContent(
+                    'Политика конфиденциальности', document1, context),
               ),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () => _showContent(
-                  'Политика конфиденциальности', document1, context),
-            ),
-            SizedBox(height: 20.0),
-            ListTile(
-              leading: Icon(Icons.description),
-              title: Text(
-                'Пользовательское соглашение',
-                style: Theme.of(context).textTheme.bodyText2,
+              SizedBox(height: 20.0),
+              ListTile(
+                leading: Icon(Icons.description),
+                title: Text(
+                  'Пользовательское соглашение',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                subtitle: Text('о пользовании сервисом'),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () => _showContent(
+                    'Пользовательское соглашение', document2, context),
               ),
-              subtitle: Text('о пользовании сервисом'),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () => _showContent(
-                  'Пользовательское соглашение', document2, context),
-            ),
-            SizedBox(height: 20.0),
-            MyFlatButton(
-              title: 'Прочитано, соглашаюсь',
-              onClick: () {},
-            )
-          ],
+              SizedBox(height: 20.0),
+              MyFlatButton(
+                title: 'Прочитано, соглашаюсь',
+                onClick: () {},
+              ),
+              SizedBox(height: 20.0),
+              Container(
+                width: double.infinity,
+                color: Theme.of(context).primaryColor.withOpacity(0.3),
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Придумайте пароль для входа',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Text(
+                      'установите пароль для входа через email минимум 6 символов',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 15.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.0),
+              TextField(
+                controller: _controller,
+                decoration: InputDecoration(
+                  labelText: "придумайте пароль",
+                ),
+              ),
+              SizedBox(height: 20.0),
+              TextField(
+                controller: _controller,
+                decoration: InputDecoration(
+                  labelText: "подтвердите пароль",
+                ),
+              ),
+              SizedBox(height: 20.0),
+              MyFlatButton(
+                title: 'Продолжить',
+                onClick: () {},
+              ),
+              SizedBox(height: 20.0),
+              Container(
+                width: double.infinity,
+                color: Theme.of(context).primaryColor.withOpacity(0.3),
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Подтвердите email для завершения регистрации',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Text(
+                      'Перейдя по ссылке из письма,чтобы подтвердить правильность указанного email',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 15.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.0),
+              MyFlatButton(
+                title: 'Продолжить',
+                onClick: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

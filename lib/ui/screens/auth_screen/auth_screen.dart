@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:turna_tv/ui/screens/registration_screen/registration_screen.dart';
-import 'package:turna_tv/ui/widgets/my_flat_button.dart';
+
+import '../../widgets/my_flat_button.dart';
+import 'registration_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   static String route = "auth";

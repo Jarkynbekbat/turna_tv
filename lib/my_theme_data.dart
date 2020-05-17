@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // #51597e
 // #ff0000
@@ -27,6 +26,7 @@ ThemeData getTheme() {
       color: Colors.white.withOpacity(0.8),
     ),
     inputDecorationTheme: InputDecorationTheme(
+      fillColor: Colors.white,
       labelStyle: TextStyle(
         color: Colors.white,
       ),

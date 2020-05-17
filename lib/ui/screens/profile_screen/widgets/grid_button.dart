@@ -16,7 +16,7 @@ class GridButton extends StatelessWidget {
     return Expanded(
       child: MaterialButton(
         onPressed: onClick,
-        color: Colors.grey,
+        color: Theme.of(context).primaryColor.withOpacity(0.3),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

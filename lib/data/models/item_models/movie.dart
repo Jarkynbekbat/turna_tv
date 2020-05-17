@@ -41,6 +41,11 @@ class Movie {
     this.screenImg,
   });
 
+  dynamic getTag() {
+    if (this.isNew()) return 'новинка';
+    if (this.isForChildren()) return 'дети';
+  }
+
   bool isNew() => this.year == DateTime.now().year ? true : false;
 
   bool isForChildren() {

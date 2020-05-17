@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:turna_tv/ui/widgets/my_flat_button.dart';
+import 'package:turna_tv/ui/screens/profile_screen/widgets/info_block.dart';
 
+import '../../widgets/my_flat_button.dart';
 import '../auth_screen/auth_screen.dart';
+import '../information_screen/information_screen.dart';
+import '../paymant_screen/paymant_screen.dart';
 import 'widgets/grid_button.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -14,52 +17,16 @@ class ProfileScreen extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 10.0),
           SizedBox(height: 20.0),
-          Container(
-            width: double.infinity,
-            color: Colors.grey,
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Подписка',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  'Подключить',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
+          InfoBlock(
+            title: 'Подписка',
+            subtitle: 'Подключить',
+            onClick: () => _toPaymant(context),
           ),
           SizedBox(height: 10.0),
-          Container(
-            width: double.infinity,
-            color: Colors.grey,
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Счет Turna',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  '0 сом',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
+          InfoBlock(
+            title: 'Счет Turna',
+            subtitle: '0 сом',
+            onClick: () => _toPaymant(context),
           ),
           SizedBox(height: 20.0),
           Row(
@@ -83,13 +50,13 @@ class ProfileScreen extends StatelessWidget {
               GridButton(
                 title: 'Помощь',
                 iconData: Icons.help,
-                onClick: () {},
+                onClick: () => _toHelp(context),
               ),
               SizedBox(width: 10.0),
               GridButton(
                 title: 'О нас',
                 iconData: Icons.info,
-                onClick: () {},
+                onClick: () => _toAboutUs(context),
               ),
             ],
           ),
@@ -102,4 +69,33 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _toPaymant(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PaymentScreen(),
+      ),
+    );
+  }
+
+  void _toHelp(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => InformationScreen(title: 'Помощь', content: help),
+      ),
+    );
+  }
+
+  void _toAboutUs(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            InformationScreen(title: 'О нас', content: aboutUs),
+      ),
+    );
+  }
+
+  final String aboutUs = ''' О нас  ''';
+
+  final String help = ''' Помощь  ''';
 }
