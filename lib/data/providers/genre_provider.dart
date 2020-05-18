@@ -11,8 +11,8 @@ class GenreProvider {
     var genresResponse = await http.get(ApiService.genres);
     var jsonResponse = convert.jsonDecode(genresResponse.body);
 
-    for (var json in jsonResponse['genres']) {
-      genres.add(Genre.fromMap(json));
+    for (var json in jsonResponse['GENRES']) {
+      genres.add(Genre.fromJson(json));
     }
 
     // return genres;

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/style.dart';
 
 class Storyline extends StatelessWidget {
   Storyline(this.storyline);
@@ -16,22 +14,13 @@ class Storyline extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyText2,
         ),
         SizedBox(height: 8.0),
-
-        Html(
-          data: storyline,
-          style: {
-            "p": Style(
-              fontSize: FontSize.large,
-            ),
-          },
+        Text(
+          storyline,
+          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                fontSize: 16.0,
+              ),
         ),
-        // Text(
-        //   storyline,
-        //   style: textTheme.body1.copyWith(
-        //     color: Colors.black45,
-        //     fontSize: 16.0,
-        //   ),
-        // ),
+        SizedBox(height: 20.0),
       ],
     );
   }

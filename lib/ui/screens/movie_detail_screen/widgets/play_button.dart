@@ -4,37 +4,39 @@ import '../../video_player_screen/video_player.dart';
 class PlayButton extends StatelessWidget {
   final String title;
   final String movieTitle;
-  final Icon icon;
+  final IconData iconData;
   final String url;
 
   const PlayButton({
     @required this.movieTitle,
     @required this.title,
-    @required this.icon,
+    @required this.iconData,
     @required this.url,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200.0,
-      child: ListTile(
-        leading: icon,
-        title: Text(title),
-      ),
+    final titleStyle =
+        Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white);
+    final iconColor =
+        Theme.of(context).textTheme.bodyText1.color.withOpacity(1);
 
-      // FlatButton(
-      //   color: Theme.of(context).accentColor,
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: <Widget>[icon, Text(title),],
-      //   ),
-      //   onPressed: () {
-      //     Navigator.of(context).push(MaterialPageRoute(
-      //       builder: (context) => VideoPlayerPage(title: movieTitle, url: url),
-      //     ));
-      //   },
-      // ),
+    return MaterialButton(
+      minWidth: MediaQuery.of(context).size.width / 100 * 35,
+      color: Theme.of(context).accentColor,
+      onPressed: () => _playVideo(context),
+      child: Row(
+        children: <Widget>[
+          Icon(iconData, color: iconColor),
+          Text(title, style: titleStyle),
+        ],
+      ),
     );
+  }
+
+  void _playVideo(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => VideoPlayerPage(title: movieTitle, url: url),
+    ));
   }
 }

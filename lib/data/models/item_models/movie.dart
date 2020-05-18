@@ -1,107 +1,130 @@
 import 'actor.dart';
+import 'company.dart';
+import 'epizode.dart';
 import 'genre.dart';
+import 'producer.dart';
+import 'scanarist.dart';
 
 class Movie {
   String title;
-  String producer;
   String detail;
-  String shortInfo;
   String language;
   String duration;
-  String age;
-  int year;
-  int categoryId;
+  String budget;
   String categoryName;
+  String countryName;
   String smallImgUrl;
   String bigImgUrl;
   String trailerUrl;
   String movieUrl;
 
-  List<Genre> genres = [];
-  List<Actor> actors = [];
-  List<dynamic> screenImg = [];
+  int age;
+  int year;
+  int categoryId;
+  int countryId;
 
-  Movie({
-    this.title,
-    this.producer,
-    this.detail,
-    this.shortInfo,
-    this.language,
-    this.duration,
-    this.age,
-    this.year,
-    this.categoryId,
-    this.categoryName,
-    this.genres,
-    // this.genreName,
-    this.smallImgUrl,
-    this.bigImgUrl,
-    this.trailerUrl,
-    this.movieUrl,
-    this.screenImg,
-  });
+  List<Genre> genres;
+  List<String> screens;
+  List<Actor> actors;
+  List<Scenarist> scenarios;
+  List<Producer> producers;
+  List<Company> companys;
+  List<Epizode> epizodes;
 
-  dynamic getTag() {
-    if (this.isNew()) return 'новинка';
-    if (this.isForChildren()) return 'дети';
-  }
+  bool isMovie;
 
-  bool isNew() => this.year == DateTime.now().year ? true : false;
+  Movie(
+      {this.title,
+      this.detail,
+      this.language,
+      this.duration,
+      this.budget,
+      this.age,
+      this.year,
+      this.categoryId,
+      this.countryId,
+      this.categoryName,
+      this.countryName,
+      this.smallImgUrl,
+      this.bigImgUrl,
+      this.trailerUrl,
+      this.movieUrl,
+      this.genres,
+      this.screens,
+      this.actors,
+      this.scenarios,
+      this.producers,
+      this.companys,
+      this.epizodes,
+      this.isMovie});
 
-  bool isForChildren() {
-    if (this.age != "Выберите возраст") {
-      int age = int.parse(this.age);
-      return age <= 12 ? true : false;
-    } else
-      return false;
-  }
+  bool isNew() => this.year == DateTime.now().year;
+  bool isForChildren() => this.age <= 6;
+  dynamic getTag() =>
+      this.isNew() ? "Новинка" : this.isForChildren() ? 'Дети' : null;
 
   Movie.fromJson(Map<String, dynamic> json) {
     title = json['title'];
-    producer = json['producer'];
     detail = json['detail'];
-    shortInfo = json['shortInfo'];
     language = json['language'];
     duration = json['duration'];
-    age = json['age'];
-    year = int.parse(json['year']);
-    categoryId = int.parse(json['categoryId']);
+    budget = json['budget'];
     categoryName = json['categoryName'];
-    // genreId = json['genreId'];
-    genres = [];
+    countryName = json['countryName'];
     smallImgUrl = json['smallImgUrl'];
     bigImgUrl = json['bigImgUrl'];
     trailerUrl = json['trailerUrl'];
     movieUrl = json['movieUrl'];
 
-    if (json['screenImg'] != null) {
-      json['screenImg'].forEach((v) {
-        screenImg.add(v.toString());
-      });
-    } else {
-      screenImg = [];
-    }
-  }
+    age = int.parse(json['age']);
+    year = int.parse(json['year']);
+    categoryId = int.parse(json['categoryId']);
+    countryId = int.parse(json['countryId']);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['title'] = this.title;
-    data['producer'] = this.producer;
-    data['detail'] = this.detail;
-    data['shortInfo'] = this.shortInfo;
-    data['language'] = this.language;
-    data['duration'] = this.duration;
-    data['age'] = this.age;
-    data['year'] = this.year;
-    data['categoryId'] = this.categoryId;
-    data['categoryName'] = this.categoryName;
-    data['genres'] = this.genres;
-    // data['genreName'] = this.genreName;
-    data['smallImgUrl'] = this.smallImgUrl;
-    data['bigImgUrl'] = this.bigImgUrl;
-    data['trailerUrl'] = this.trailerUrl;
-    data['movieUrl'] = this.movieUrl;
-    data['screenImg'] = this.screenImg;
-    return data;
+    if (json['genres'] != null) {
+      genres = List<Genre>();
+      json['genres'].forEach((v) {
+        genres.add(Genre.fromJson(v));
+      });
+    }
+    if (json['screens'] != null) {
+      screens = List<String>();
+      json['screens'].forEach((v) {
+        screens.add(v['img']);
+      });
+    }
+    if (json['actors'] != null) {
+      actors = List<Actor>();
+      json['actors'].forEach((v) {
+        actors.add(Actor.fromJson(v));
+      });
+    }
+    if (json['scenarios'] != null) {
+      scenarios = List<Scenarist>();
+      json['scenarios'].forEach((v) {
+        scenarios.add(Scenarist.fromJson(v));
+      });
+    }
+    if (json['producers'] != null) {
+      producers = List<Producer>();
+      json['producers'].forEach((v) {
+        producers.add(Producer.fromJson(v));
+      });
+    }
+    if (json['companys'] != null) {
+      companys = List<Company>();
+      json['companys'].forEach((v) {
+        companys.add(Company.fromJson(v));
+      });
+    }
+
+    // TODO if (json['epizodes'] != null) {
+    //   epizodes = List<Epizode>();
+    //   json['epizodes'].forEach((v) {
+    //     companys.add(Epizode.fromJson(v));
+    //   });
+    // }
+
+    isMovie = json['isMovie'];
   }
 }

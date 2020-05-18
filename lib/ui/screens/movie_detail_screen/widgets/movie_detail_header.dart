@@ -9,12 +9,12 @@ class MovieDetailHeader extends StatelessWidget {
   MovieDetailHeader(this.movie);
   final Movie movie;
 
-  List<Widget> _buildCategoryChips(TextTheme textTheme) {
-    return ["фантастика", "ужасы"].map((category) {
+  List<Widget> _buildGenreChips(TextTheme textTheme) {
+    return movie.genres.map((genre) {
       return Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: Chip(
-          label: Text(category),
+          label: Text(genre.title),
           labelStyle: textTheme.caption,
           backgroundColor: Colors.black12,
         ),
@@ -40,7 +40,7 @@ class MovieDetailHeader extends StatelessWidget {
         ),
         // RatingInformation(movie),
         SizedBox(height: 8.0),
-        Row(children: _buildCategoryChips(textTheme)),
+        Wrap(children: _buildGenreChips(textTheme)),
       ],
     );
 

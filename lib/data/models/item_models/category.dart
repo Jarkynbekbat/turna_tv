@@ -1,27 +1,20 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:turna_tv/data/models/item_models/genre.dart';
+import 'genre.dart';
 
 class Category {
-  final int id;
-  final String name;
-  final List<Genre> genres;
+  int id;
+  String title;
+  List<Genre> genres;
 
-  Category({
-    @required this.id,
-    @required this.name,
-    @required this.genres,
-  });
+  Category({this.id, this.title, this.genres});
 
-  static Category fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Category(
-      id: int.parse(map['categoryId']),
-      name: map['categoryName'],
-    );
+  Category.fromJson(Map<String, dynamic> json) {
+    id = int.parse(json['id']);
+    title = json['title'];
+    if (json['genres'] != null) {
+      genres = List<Genre>();
+      json['genres'].forEach((v) {
+        genres.add(Genre.fromJson(v));
+      });
+    }
   }
-
-  static Category fromJson(String source) => fromMap(json.decode(source));
 }

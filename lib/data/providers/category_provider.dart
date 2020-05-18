@@ -9,8 +9,8 @@ class CategoryProvider {
     var categoriesResponse = await http.get(ApiService.categories);
     var jsonResponse = convert.jsonDecode(categoriesResponse.body);
 
-    for (var json in jsonResponse['categorys']) {
-      categories.add(Category.fromMap(json));
+    for (var json in jsonResponse['CATEGORIES']) {
+      categories.add(Category.fromJson(json));
     }
 
     return categories;

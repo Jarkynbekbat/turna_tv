@@ -1,21 +1,13 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 class Genre {
-  final int id;
-  final String name;
-  final int categoryId;
-  Genre({@required this.id, @required this.name, @required this.categoryId});
+  int id;
+  String title;
+  int categoryId;
 
-  static Genre fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    return Genre(
-      id: int.parse(map['genreId']),
-      name: map['genreName'],
-      categoryId: int.parse(map['genreCategoryId']),
-    );
+  Genre({this.id, this.title, this.categoryId});
+
+  Genre.fromJson(Map<String, dynamic> json) {
+    id = int.parse(json['id']);
+    title = json['title'];
+    categoryId = int.parse(json['categoryId']);
   }
-
-  static Genre fromJson(String source) => fromMap(json.decode(source));
 }

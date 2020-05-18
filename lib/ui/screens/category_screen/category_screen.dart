@@ -31,7 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   Widget _buildLoaded(CategoryLoaded state) {
-    var tabs = state.model.categories.map((c) => Tab(text: c.name)).toList();
+    var tabs = state.model.categories.map((c) => Tab(text: c.title)).toList();
 
     return DefaultTabController(
       length: tabs.length,
@@ -56,7 +56,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget _buildTab(int categoryId, CategoryLoaded state) {
     var genres = state.model
         .getGenresByCategoryId(categoryId)
-        .map((e) => e.name)
+        .map((e) => e.title)
         .toList();
     var movies = state.model.getMoviesByCategoryId(categoryId);
 

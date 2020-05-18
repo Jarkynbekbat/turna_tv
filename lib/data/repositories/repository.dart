@@ -15,9 +15,12 @@ class Repository {
   List<Genre> genres = [];
 
   Future<bool> initAll() async {
-    this.movies = await _movieProvider.getAll();
-    this.categories = await _categoryProvider.getAll();
     this.genres = await _genreProvider.getAll();
+    this.categories = await _categoryProvider.getAll();
+    this.movies = await _movieProvider.getAll();
+
+    print('object');
+
     return true;
   }
 }
