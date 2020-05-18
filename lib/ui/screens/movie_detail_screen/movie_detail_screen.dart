@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:turna_tv/data/providers/services/api_service.dart';
-import 'package:turna_tv/ui/screens/movie_detail_screen/widgets/actors_scroller.dart';
 
 import '../../../data/models/item_models/movie.dart';
+import '../../../data/providers/services/api_service.dart';
+import 'widgets/actors_scroller.dart';
 import 'widgets/movie_detail_header.dart';
 import 'widgets/photo_scroller.dart';
 import 'widgets/play_button.dart';

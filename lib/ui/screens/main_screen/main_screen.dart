@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:turna_tv/ui/screens/profile_screen/profile_screen.dart';
 
 import '../../widgets/bottom_navigation.dart';
 import '../category_screen/category_screen.dart';
 import '../home_screen/home_screen.dart';
+import '../profile_screen/profile_screen.dart';
 import '../search_screen/search_screen.dart';
 
 class MainScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:turna_tv/data/models/item_models/movie.dart';
-import 'package:turna_tv/ui/widgets/movie_card.dart';
+import '../../../data/models/item_models/movie.dart';
+import '../../widgets/movie_card.dart';
 
 class MovieGridScreen extends StatelessWidget {
   final String title;

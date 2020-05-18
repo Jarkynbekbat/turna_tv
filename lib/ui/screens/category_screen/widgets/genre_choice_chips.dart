@@ -21,7 +21,7 @@ class GenreChoiceChips extends StatelessWidget with PreferredSizeWidget {
         value: (i, v) => v,
         label: (i, v) => v,
       ),
-      onChanged: (val) {},
+      onChanged: onChanged,
     );
   }
 

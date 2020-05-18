@@ -1,6 +1,6 @@
-import 'package:turna_tv/data/models/item_models/category.dart';
-import 'package:turna_tv/data/models/item_models/genre.dart';
-import 'package:turna_tv/data/models/item_models/movie.dart';
+import '../item_models/category.dart';
+import '../item_models/genre.dart';
+import '../item_models/movie.dart';
 
 class CategoryScreenModel {
   final List<Movie> movies;
@@ -21,7 +21,14 @@ class CategoryScreenModel {
     return this.genres.where((g) => g.categoryId == categoryId).toList();
   }
 
-  List<Movie> getMoviesByCategoryAndGenreIds(int categoryId, int genreId) {
-    return this.movies.where((m) => m.categoryId == categoryId);
+  List<Movie> getMoviesByCategoryAndGenreName(int categoryId, String genre) {
+    return this
+        .movies
+        .where(
+          (m) =>
+              m.categoryId == categoryId &&
+              m.genres.map((e) => e.title).contains(genre),
+        )
+        .toList();
   }
 }

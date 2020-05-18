@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
 import 'share_data_widget.dart';
 
 class VideoDurationToolBar extends StatefulWidget {
@@ -40,7 +41,7 @@ class _VideoDurationToolBarState extends State<VideoDurationToolBar> {
 
   @override
   Widget build(BuildContext context) {
-    print("shared: "+ShareDataWidget.of(context).data.toString());
+    print("shared: " + ShareDataWidget.of(context).data.toString());
     return Container(
       height: 30,
       child:

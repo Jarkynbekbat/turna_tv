@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/category_bloc/category_bloc.dart';
+import '../../../data/models/item_models/movie.dart';
 import '../../widgets/app_bar_title.dart';
 import '../../widgets/error_screen.dart';
 import '../../widgets/movie_card.dart';
@@ -14,6 +15,8 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  String selectedGenre = 'все';
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryBloc, CategoryState>(
@@ -54,18 +57,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   Widget _buildTab(int categoryId, CategoryLoaded state) {
+    var movies = <Movie>[];
     var genres = state.model
         .getGenresByCategoryId(categoryId)
         .map((e) => e.title)
         .toList();
-    var movies = state.model.getMoviesByCategoryId(categoryId);
+    genres.insert(0, 'все');
+
+    if (selectedGenre == 'все') {
+      movies = state.model.getMoviesByCategoryId(categoryId);
+    } else {
+      movies = state.model
+          .getMoviesByCategoryAndGenreName(categoryId, selectedGenre);
+    }
 
     return Wrap(
       children: <Widget>[
         GenreChoiceChips(
           options: genres,
-          value: 'все',
-          onChanged: () {},
+          value: selectedGenre,
+          onChanged: (value) {
+            setState(() {
+              selectedGenre = value;
+            });
+          },
         ),
         Container(
           height: 450,

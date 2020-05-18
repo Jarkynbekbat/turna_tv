@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/search_bloc/search_bloc.dart';
 import '../../../data/models/item_models/movie.dart';
 import '../../widgets/error_screen.dart';
-import '../../widgets/screen_loading.dart';
 import '../../widgets/movie_card.dart';
+import '../../widgets/screen_loading.dart';
 
 class SearchScreen extends StatefulWidget {
   @override

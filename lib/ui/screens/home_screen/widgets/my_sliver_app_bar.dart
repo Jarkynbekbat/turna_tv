@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:turna_tv/ui/widgets/app_bar_title.dart';
+
+import '../../../widgets/app_bar_title.dart';
 
 class MySliberAppBar extends StatelessWidget {
   final double height;

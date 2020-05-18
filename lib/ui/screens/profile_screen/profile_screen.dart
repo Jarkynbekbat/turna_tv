@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:turna_tv/ui/screens/profile_screen/widgets/info_block.dart';
 
 import '../../widgets/my_flat_button.dart';
 import '../auth_screen/auth_screen.dart';
 import '../information_screen/information_screen.dart';
 import '../paymant_screen/paymant_screen.dart';
 import 'widgets/grid_button.dart';
+import 'widgets/info_block.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override

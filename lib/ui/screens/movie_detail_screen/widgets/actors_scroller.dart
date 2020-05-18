@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:turna_tv/data/providers/services/api_service.dart';
 
 import '../../../../data/models/item_models/actor.dart';
+import '../../../../data/providers/services/api_service.dart';
 
 class ActorScroller extends StatelessWidget {
   ActorScroller(this.actors);
