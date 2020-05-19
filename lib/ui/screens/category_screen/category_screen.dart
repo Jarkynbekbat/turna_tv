@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -58,10 +59,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   Widget _buildTab(int categoryId, CategoryLoaded state) {
     var movies = <Movie>[];
+
     var genres = state.model
         .getGenresByCategoryId(categoryId)
         .map((e) => e.title)
         .toList();
+
     genres.insert(0, 'все');
 
     if (selectedGenre == 'все') {

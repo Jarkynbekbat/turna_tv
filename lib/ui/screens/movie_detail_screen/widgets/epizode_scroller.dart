@@ -1,20 +1,25 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../screenshot_screen.dart';
+import '../../../../data/models/item_models/epizode.dart';
+import '../../../../data/models/item_models/serie.dart';
+import '../../../../data/providers/services/api_service.dart';
+import '../../video_player_screen/video_player.dart';
 
-class PhotoScroller extends StatelessWidget {
-  final List<String> photoUrls;
-  PhotoScroller({@required this.photoUrls});
+class EpizodeScroller extends StatelessWidget {
+  final Epizode epizode;
+  EpizodeScroller({@required this.epizode});
 
-  Widget _buildPhoto(BuildContext context, int index) {
-    var photo = photoUrls[index];
-
+  Widget _buildSerie(BuildContext context, int index) {
+    Serie serie = epizode.series[index];
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ScreenshotScreen(url: photo),
+            builder: (context) =>
+                VideoPlayerPage(title: serie.title, url: serie.url),
           ),
         );
       },
@@ -23,7 +28,7 @@ class PhotoScroller extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(4.0),
           child: CachedNetworkImage(
-            imageUrl: photo,
+            imageUrl: ApiService.imgBase + serie.img,
             width: 160.0,
             height: 120.0,
             fit: BoxFit.cover,
@@ -41,17 +46,15 @@ class PhotoScroller extends StatelessWidget {
         SizedBox(height: 12.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Text(
-            'Кадры',
-          ),
+          child: Text(epizode.epizodeName),
         ),
         SizedBox.fromSize(
           size: const Size.fromHeight(100.0),
           child: ListView.builder(
-            itemCount: photoUrls.length,
+            itemCount: epizode.series.length,
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(top: 8.0, left: 16.0, bottom: 12.0),
-            itemBuilder: _buildPhoto,
+            itemBuilder: _buildSerie,
           ),
         ),
         SizedBox(height: 12.0),

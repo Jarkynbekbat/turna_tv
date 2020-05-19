@@ -1,9 +1,8 @@
-import 'actor.dart';
-import 'company.dart';
+import 'package:turna_tv/data/models/item_models/people.dart';
+
+import 'people.dart';
 import 'epizode.dart';
 import 'genre.dart';
-import 'producer.dart';
-import 'scanarist.dart';
 
 class Movie {
   String title;
@@ -25,10 +24,7 @@ class Movie {
 
   List<Genre> genres;
   List<String> screens;
-  List<Actor> actors;
-  List<Scenarist> scenarios;
-  List<Producer> producers;
-  List<Company> companys;
+  List<People> people;
   List<Epizode> epizodes;
 
   bool isMovie;
@@ -51,10 +47,7 @@ class Movie {
       this.movieUrl,
       this.genres,
       this.screens,
-      this.actors,
-      this.scenarios,
-      this.producers,
-      this.companys,
+      this.people,
       this.epizodes,
       this.isMovie});
 
@@ -93,37 +86,19 @@ class Movie {
         screens.add(v['img']);
       });
     }
-    if (json['actors'] != null) {
-      actors = List<Actor>();
-      json['actors'].forEach((v) {
-        actors.add(Actor.fromJson(v));
-      });
-    }
-    if (json['scenarios'] != null) {
-      scenarios = List<Scenarist>();
-      json['scenarios'].forEach((v) {
-        scenarios.add(Scenarist.fromJson(v));
-      });
-    }
-    if (json['producers'] != null) {
-      producers = List<Producer>();
-      json['producers'].forEach((v) {
-        producers.add(Producer.fromJson(v));
-      });
-    }
-    if (json['companys'] != null) {
-      companys = List<Company>();
-      json['companys'].forEach((v) {
-        companys.add(Company.fromJson(v));
+    if (json['people'] != null) {
+      people = List<People>();
+      json['people'].forEach((v) {
+        people.add(People.fromJson(v));
       });
     }
 
-    // TODO if (json['epizodes'] != null) {
-    //   epizodes = List<Epizode>();
-    //   json['epizodes'].forEach((v) {
-    //     companys.add(Epizode.fromJson(v));
-    //   });
-    // }
+    if (json['epizodes'] != null) {
+      epizodes = List<Epizode>();
+      json['epizodes'].forEach((v) {
+        epizodes.add(Epizode.fromJson(v));
+      });
+    }
 
     isMovie = json['isMovie'];
   }

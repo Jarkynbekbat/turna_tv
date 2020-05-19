@@ -18,7 +18,15 @@ class CategoryScreenModel {
   }
 
   List<Genre> getGenresByCategoryId(int categoryId) {
-    return this.genres.where((g) => g.categoryId == categoryId).toList();
+    List<Genre> genresT =
+        this.genres.where((g) => g.categoryId == categoryId).toList();
+
+    List<Genre> filtredGenres = genresT
+        .where((g) =>
+            this.getMoviesByCategoryAndGenreName(categoryId, g.title).length !=
+            0)
+        .toList();
+    return filtredGenres;
   }
 
   List<Movie> getMoviesByCategoryAndGenreName(int categoryId, String genre) {
