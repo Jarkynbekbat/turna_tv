@@ -2,14 +2,12 @@ import 'package:first_time_screen/first_time_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'app_config.dart';
 import 'blocs/auth_bloc/auth_bloc.dart';
 import 'blocs/category_bloc/category_bloc.dart';
 import 'blocs/home_bloc/home_bloc.dart';
 import 'blocs/search_bloc/search_bloc.dart';
 import 'data/repositories/repository.dart';
-import 'my_theme_data.dart';
-import 'ui/screens/auth_screen/auth_screen.dart';
-import 'ui/screens/home_screen/home_screen.dart';
 import 'ui/screens/intro_screen/intro_screen.dart';
 import 'ui/screens/main_screen/main_screen.dart';
 import 'ui/widgets/screen_loading.dart';
@@ -22,22 +20,16 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => SearchBloc(
-              context.repository<Repository>(),
-            ),
+            create: (context) => SearchBloc(context.repository<Repository>()),
           ),
           BlocProvider(
-            create: (context) => CategoryBloc(
-              context.repository<Repository>(),
-            ),
+            create: (context) => CategoryBloc(context.repository<Repository>()),
           ),
           BlocProvider(
-            create: (context) => HomeBloc(
-              context.repository<Repository>(),
-            ),
+            create: (context) => HomeBloc(context.repository<Repository>()),
           ),
           BlocProvider(
-            create: (context) => AuthBloc(),
+            create: (context) => AuthBloc(context.repository<Repository>()),
           ),
         ],
         child: MaterialApp(
@@ -51,10 +43,7 @@ class App extends StatelessWidget {
               builder: (context) => MainScreen(),
             ),
           ),
-          routes: <String, WidgetBuilder>{
-            AuthScreen.route: (context) => AuthScreen(),
-            HomeScreen.route: (context) => HomeScreen(),
-          },
+          routes: getRoutes(),
         ),
       ),
     );

@@ -1,15 +1,121 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../blocs/auth_bloc/auth_bloc.dart';
+import '../../../data/models/item_models/user.dart';
+import '../../widgets/error_screen.dart';
 import '../../widgets/my_flat_button.dart';
+import '../../widgets/screen_loading.dart';
 import '../auth_screen/auth_screen.dart';
 import '../information_screen/information_screen.dart';
+import '../movie_grid_screen/movie_grid_screen.dart';
 import '../paymant_screen/paymant_screen.dart';
 import 'widgets/grid_button.dart';
 import 'widgets/info_block.dart';
+import 'widgets/info_dialog.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthInitial) _listenInitial(context);
+        if (state is AuthLogedOut) return _buildLogedOut(context);
+        if (state is AuthLogedIn) return _buildLogedIn(context, state.user);
+        if (state is AuthError) return ErrorScreen(state.message);
+        return ScreenLoading();
+      },
+    );
+  }
+
+  void _listenInitial(BuildContext context) {
+    context.bloc<AuthBloc>().add(CheckUser());
+  }
+
+  Widget _buildLogedIn(BuildContext context, User user) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 30.0),
+          InfoBlock(
+            title: 'Профиль',
+            subtitle: user.name,
+            onClick: () => _toPaymant(context),
+          ),
+          SizedBox(height: 10.0),
+          InfoBlock(
+            title: 'Подписка',
+            subtitle: user.isActive
+                ? 'действует до ${user.isActiveBefore.toLocal()}'
+                : 'Подключить',
+            onClick: () => _toPaymant(context),
+          ),
+          SizedBox(height: 10.0),
+          SizedBox(height: 20.0),
+          Row(
+            children: <Widget>[
+              GridButton(
+                title: 'Смотреть позже',
+                iconData: Icons.turned_in_not,
+                onClick: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MovieGridScreen(
+                        title: 'Смотреть позже',
+                        movies: user.watchLaterMovies,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              SizedBox(width: 10.0),
+              GridButton(
+                title: 'Просмотры',
+                iconData: Icons.access_time,
+                onClick: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MovieGridScreen(
+                        title: 'Просмотры',
+                        movies: user.watchLaterMovies,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          SizedBox(height: 10.0),
+          Row(
+            children: <Widget>[
+              GridButton(
+                title: 'Помощь',
+                iconData: Icons.help,
+                onClick: () => _toHelp(context),
+              ),
+              SizedBox(width: 10.0),
+              GridButton(
+                title: 'О нас',
+                iconData: Icons.info,
+                onClick: () => _toAboutUs(context),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.0),
+          MyFlatButton(
+            title: 'Выйти',
+            onClick: () {
+              context.bloc<AuthBloc>().add(Logout());
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLogedOut(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -19,28 +125,32 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: 20.0),
           InfoBlock(
             title: 'Подписка',
-            subtitle: 'Подключить',
-            onClick: () => _toPaymant(context),
+            subtitle: 'подключить',
+            onClick: () {
+              showInfoDialog(
+                  context, 'данный раздел доступен только после авторизации');
+            },
           ),
           SizedBox(height: 10.0),
-          InfoBlock(
-            title: 'Счет Turna',
-            subtitle: '0 сом',
-            onClick: () => _toPaymant(context),
-          ),
           SizedBox(height: 20.0),
           Row(
             children: <Widget>[
               GridButton(
                 title: 'Смотреть позже',
                 iconData: Icons.turned_in_not,
-                onClick: () {},
+                onClick: () {
+                  showInfoDialog(context,
+                      'данный раздел доступен только после авторизации');
+                },
               ),
               SizedBox(width: 10.0),
               GridButton(
                 title: 'Просмотры',
                 iconData: Icons.access_time,
-                onClick: () {},
+                onClick: () {
+                  showInfoDialog(context,
+                      'данный раздел доступен только после авторизации');
+                },
               ),
             ],
           ),

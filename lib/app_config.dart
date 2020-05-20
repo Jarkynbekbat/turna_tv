@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'ui/screens/auth_screen/auth_screen.dart';
+import 'ui/screens/home_screen/home_screen.dart';
+
 // #51597e
 // #ff0000
 // #151721
@@ -33,3 +36,8 @@ ThemeData getTheme() {
     ),
   );
 }
+
+Map<String, WidgetBuilder> getRoutes() => <String, WidgetBuilder>{
+      AuthScreen.route: (context) => AuthScreen(),
+      HomeScreen.route: (context) => HomeScreen(),
+    };
