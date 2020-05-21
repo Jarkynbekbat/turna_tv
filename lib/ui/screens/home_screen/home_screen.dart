@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../../blocs/home_bloc/home_bloc.dart';
 import '../../widgets/error_screen.dart';
 import '../../widgets/movie_horizontal_list.dart';
 import '../../widgets/screen_loading.dart';
 import 'widgets/banners_carousel.dart';
 import 'widgets/my_sliver_app_bar.dart';
-
-// https://pub.dev/packages/carousel_slider
-// https://pub.dev/packages/font_awesome_flutter
-// https://pub.dev/packages/video_player
-// https://pub.dev/packages/shimmer
-// https://pub.dev/packages/animations
 
 class HomeScreen extends StatefulWidget {
   static String route = 'home';
@@ -24,13 +19,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
-      builder: (context, state) {
-        if (state is HomeInitial) _listenInitial(context);
-        if (state is HomeLoaded) return _buildLoaded(state);
-        if (state is HomeError) return ErrorScreen(state.error.toString());
-        return ScreenLoading();
+    return BlocListener<HomeBloc, HomeState>(
+      listener: (context, state) {
+        if (state is HomeLoaded) _listenLoaded();
       },
+      child: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state is HomeInitial) _listenInitial(context);
+          if (state is HomeLoaded) return _buildLoaded(state);
+          if (state is HomeError) return ErrorScreen(state.error.toString());
+          return ScreenLoading();
+        },
+      ),
     );
   }
 
@@ -75,5 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _listenInitial(BuildContext context) {
     context.bloc<HomeBloc>().add(FetchHomeScreenData());
+  }
+
+  void _listenLoaded() {
+    context.bloc<AuthBloc>().add(CheckUser());
   }
 }

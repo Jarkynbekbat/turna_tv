@@ -13,8 +13,11 @@ class UserProvider {
       },
     );
     var jsonResponse = convert.jsonDecode(response.body);
+    print('object');
+
     User user = User.fromJson(jsonResponse['AUTHORIZATION'][0]);
 
+    print('object');
     return user;
   }
 }

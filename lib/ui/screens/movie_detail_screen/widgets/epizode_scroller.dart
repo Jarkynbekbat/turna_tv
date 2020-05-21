@@ -46,7 +46,7 @@ class EpizodeScroller extends StatelessWidget {
         SizedBox(height: 12.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Text(epizode.epizodeName),
+          child: Text(epizode.epizodeTitle),
         ),
         SizedBox.fromSize(
           size: const Size.fromHeight(100.0),

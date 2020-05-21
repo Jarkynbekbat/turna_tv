@@ -29,7 +29,7 @@ class PeopleScroller extends StatelessWidget {
           ),
           SizedBox(height: 2.0),
           Text(
-            person.title,
+            person.name,
             style: Theme.of(context).textTheme.bodyText1.copyWith(
                   fontSize: 12.0,
                   color: Theme.of(context)

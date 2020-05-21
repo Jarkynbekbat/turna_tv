@@ -18,6 +18,7 @@ class _MainScreenState extends State<MainScreen> {
     SearchScreen(),
     ProfileScreen(),
   ];
+
   int _currentIndex = 0;
 
   @override

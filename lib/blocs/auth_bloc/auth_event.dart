@@ -5,11 +5,6 @@ abstract class AuthEvent {}
 
 class CheckUser extends AuthEvent {}
 
-class CheckLogin extends AuthEvent {
-  final String login;
-  CheckLogin({@required this.login});
-}
-
 class LoginByEmail extends AuthEvent {
   final String email;
   final String password;

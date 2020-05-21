@@ -8,7 +8,7 @@ class Category {
   Category({this.id, this.title, this.genres});
 
   Category.fromJson(Map<String, dynamic> json) {
-    id = int.parse(json['id']);
+    id = json['id'];
     title = json['title'];
     if (json['genres'] != null) {
       genres = List<Genre>();

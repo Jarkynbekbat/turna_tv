@@ -13,6 +13,7 @@ import '../paymant_screen/paymant_screen.dart';
 import 'widgets/grid_button.dart';
 import 'widgets/info_block.dart';
 import 'widgets/info_dialog.dart';
+import 'widgets/makesure_dialog.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -42,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
           InfoBlock(
             title: 'Профиль',
             subtitle: user.name,
-            onClick: () => _toPaymant(context),
+            onClick: () {},
           ),
           SizedBox(height: 10.0),
           InfoBlock(
@@ -50,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
             subtitle: user.isActive
                 ? 'действует до ${user.isActiveBefore.toLocal()}'
                 : 'Подключить',
-            onClick: () => _toPaymant(context),
+            onClick: user.isActive ? () {} : () => _toPaymant(context),
           ),
           SizedBox(height: 10.0),
           SizedBox(height: 20.0),
@@ -106,8 +107,12 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: 20.0),
           MyFlatButton(
             title: 'Выйти',
-            onClick: () {
-              context.bloc<AuthBloc>().add(Logout());
+            onClick: () async {
+              bool res = await showMakesureDialog(
+                  context, 'Вы уверены что хотите выйти ?');
+              if (res) {
+                context.bloc<AuthBloc>().add(Logout());
+              }
             },
           )
         ],

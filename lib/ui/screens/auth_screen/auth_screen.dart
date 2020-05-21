@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:turna_tv/ui/screens/profile_screen/widgets/error_dialog.dart';
 
 import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../widgets/my_flat_button.dart';
+import '../profile_screen/widgets/error_dialog.dart';
 
 class AuthScreen extends StatefulWidget {
   static String route = "auth";
@@ -27,6 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthError) showErrorDialog(context, state.message);
+          if (state is AuthLogedIn) Navigator.of(context).pop();
         },
         child: SingleChildScrollView(
           child: Padding(
@@ -85,8 +86,6 @@ class _AuthScreenState extends State<AuthScreen> {
     context
         .bloc<AuthBloc>()
         .add(LoginByEmail(email: email, password: password));
-
-    // Navigator.of(context).pop();
 
     // Navigator.of(context).push(
     //   MaterialPageRoute(
