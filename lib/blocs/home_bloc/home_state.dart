@@ -13,6 +13,6 @@ class HomeLoaded extends HomeState {
 }
 
 class HomeError extends HomeState {
-  final Error error;
-  HomeError({@required this.error});
+  final String message;
+  HomeError({@required this.message});
 }

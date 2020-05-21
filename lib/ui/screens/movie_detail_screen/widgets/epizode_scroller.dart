@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:turna_tv/ui/screens/profile_screen/widgets/info_dialog.dart';
 
 import '../../../../data/models/item_models/epizode.dart';
 import '../../../../data/models/item_models/serie.dart';
@@ -10,19 +11,19 @@ import '../../video_player_screen/video_player.dart';
 
 class EpizodeScroller extends StatelessWidget {
   final Epizode epizode;
-  EpizodeScroller({@required this.epizode});
+  final bool isAllowed;
+
+  EpizodeScroller({
+    @required this.epizode,
+    @required this.isAllowed,
+  });
 
   Widget _buildSerie(BuildContext context, int index) {
     Serie serie = epizode.series[index];
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) =>
-                VideoPlayerPage(title: serie.title, url: serie.url),
-          ),
-        );
-      },
+      onTap: isAllowed
+          ? () => _playVideo(context, serie)
+          : () => showInfoDialog(context, 'Доступ только по подписке'),
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: ClipRRect(
@@ -34,6 +35,15 @@ class EpizodeScroller extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+      ),
+    );
+  }
+
+  void _playVideo(BuildContext context, Serie serie) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            VideoPlayerPage(title: serie.title, url: serie.url),
       ),
     );
   }

@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) {
           if (state is HomeInitial) _listenInitial(context);
           if (state is HomeLoaded) return _buildLoaded(state);
-          if (state is HomeError) return ErrorScreen(state.error.toString());
+          if (state is HomeError) return ErrorScreen(state.message);
           return ScreenLoading();
         },
       ),

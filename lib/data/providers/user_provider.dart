@@ -13,6 +13,10 @@ class UserProvider {
       },
     );
     var jsonResponse = convert.jsonDecode(response.body);
+
+    if (jsonResponse == 488) throw Exception(jsonResponse);
+    if (jsonResponse == 401) throw Exception(jsonResponse);
+
     print('object');
 
     User user = User.fromJson(jsonResponse['AUTHORIZATION'][0]);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turna_tv/ui/screens/profile_screen/widgets/info_dialog.dart';
 
 import '../../video_player_screen/video_player.dart';
 
@@ -7,12 +8,14 @@ class PlayButton extends StatelessWidget {
   final String movieTitle;
   final IconData iconData;
   final String url;
+  final bool isAllowed;
 
   const PlayButton({
     @required this.movieTitle,
     @required this.title,
     @required this.iconData,
     @required this.url,
+    @required this.isAllowed,
   });
 
   @override
@@ -25,7 +28,9 @@ class PlayButton extends StatelessWidget {
     return MaterialButton(
       minWidth: MediaQuery.of(context).size.width / 100 * 35,
       color: Theme.of(context).accentColor,
-      onPressed: () => _playVideo(context),
+      onPressed: isAllowed
+          ? () => _playVideo(context)
+          : () => showInfoDialog(context, 'Доступ только по подписке'),
       child: Row(
         children: <Widget>[
           Icon(iconData, color: iconColor),

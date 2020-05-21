@@ -3,7 +3,7 @@ class Serie {
   String title;
   String img;
   String url;
-  String zindex;
+  int zindex;
 
   Serie({this.id, this.title, this.img, this.url, this.zindex});
 

@@ -34,9 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Stream<AuthState> _mapCheckUserToState() async* {
     try {
-      // yield AuthLoading();
       User user = _repository.user;
-
       print('object');
       if (user == null)
         yield AuthLogedOut();
@@ -55,7 +53,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       print('object');
       yield AuthLogedIn(user: _repository.user);
     } catch (ex) {
-      yield AuthError(message: ex.toString());
+      if (ex.message == 488)
+        yield AuthNeedRegistration();
+      else if (ex.message == 401)
+        yield AuthError(message: 'Не правильный логин или пароль');
+      else
+        yield AuthError(message: 'Что то пошло не так.. попробуйте снова..');
     }
+  }
+
+  bool isUserActive() {
+    if (_repository.user == null) return false;
+    if (!_repository.user.isActive) return false;
+    return true;
   }
 }

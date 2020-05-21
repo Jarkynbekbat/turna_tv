@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../../data/models/item_models/epizode.dart';
 import '../../../data/models/item_models/movie.dart';
 import '../../../data/providers/services/api_service.dart';
@@ -27,6 +29,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isAllowed = context.bloc<AuthBloc>().isUserActive();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -34,8 +38,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           children: [
             MovieDetailHeader(widget.movie),
             widget.movie.isMovie
-                ? _buildMovieControls()
-                : _buildSerialControls(),
+                ? _buildMovieControls(isAllowed)
+                : _buildSerialControls(isAllowed),
             _buildPhotoScroller(widget.movie.screens),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -48,7 +52,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     );
   }
 
-  Widget _buildMovieControls() {
+  Widget _buildMovieControls(isAllowed) {
     return Padding(
         padding: const EdgeInsets.only(left: 16.0, top: 12.0, right: 16.0),
         child: Row(
@@ -59,6 +63,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               iconData: Icons.play_arrow,
               title: 'Смотреть',
               url: widget.movie.movieUrl,
+              isAllowed: isAllowed,
             ),
             SizedBox(width: 12.0),
             PlayButton(
@@ -66,6 +71,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               iconData: Icons.local_movies,
               title: 'Трейлер',
               url: widget.movie.trailerUrl,
+              isAllowed: true,
             ),
             SizedBox(width: 12.0),
             IconButton(
@@ -77,13 +83,16 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         ));
   }
 
-  Widget _buildSerialControls() {
+  Widget _buildSerialControls(isAllowed) {
     List<Widget> epizodes = [];
     for (Epizode epizode in widget.movie.epizodes) {
       if (epizode.series.length == 0)
         epizodes.add(ComingSoon());
       else
-        epizodes.add(EpizodeScroller(epizode: epizode));
+        epizodes.add(EpizodeScroller(
+          epizode: epizode,
+          isAllowed: isAllowed,
+        ));
     }
     return Column(children: epizodes);
   }

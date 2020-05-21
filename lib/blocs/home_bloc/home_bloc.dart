@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -31,8 +32,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       yield HomeLoaded(model: HomeScreenModel(movies: _repository.movies));
     } catch (e) {
+      String message;
+      if (e is SocketException)
+        message = "Проверьте интернет соединение и попробуйте снова";
+
       print('object');
-      yield HomeError(error: e);
+      yield HomeError(message: message);
     }
   }
 }
