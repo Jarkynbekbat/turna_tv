@@ -1,5 +1,4 @@
-import 'package:turna_tv/ui/screens/registration_screen/registration_screen.dart';
-
+import '../../ui/screens/registration_screen/registration_screen.dart';
 import '../models/item_models/category.dart';
 import '../models/item_models/genre.dart';
 import '../models/item_models/movie.dart';
@@ -25,12 +24,23 @@ class Repository {
     this.genres = await _genreProvider.getAll();
     this.categories = await _categoryProvider.getAll();
     this.movies = await _movieProvider.getAll();
-
-    print('object');
     this.user = await LocalUserService.getUser();
 
     print('object');
     return true;
+  }
+
+  Future<bool> addWatchLaterMovie(int movieId) async {
+    String token = user.token;
+
+    bool res = await _userProvider.addWatchLater(token, movieId);
+    if (res) {
+      Movie movie = movies.firstWhere((m) => m.id == movieId);
+      user.watchLaterMovies.add(movie);
+      LocalUserService.setUser(this.user);
+      return true;
+    } else
+      return false;
   }
 
   Future<bool> initUserByEmail(String email, String password) async {

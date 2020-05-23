@@ -2,6 +2,7 @@ import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:turna_tv/data/providers/services/device_info_service.dart';
 
 import '../../ui/screens/registration_screen/registration_screen.dart';
 import '../models/item_models/user.dart';
@@ -14,8 +15,13 @@ class UserProvider {
       body: {
         "email": email,
         "password": password,
+        "ip": await getIP(),
+        "device": await getModel(),
+        "platform": getPlatform(),
       },
     );
+
+    print('object');
     var jsonResponse = convert.jsonDecode(response.body);
 
     if (jsonResponse == 488) throw Exception([jsonResponse, email, password]);
@@ -38,13 +44,30 @@ class UserProvider {
     }
   }
 
+  Future<bool> addWatchLater(String token, int movieId) async {
+    Response response = await http.post(
+      ApiService.addWatchLater,
+      body: {
+        "token": token,
+        "movieId": movieId.toString(),
+      },
+    );
+
+    if (response.statusCode == 200)
+      return true;
+    else
+      return false;
+  }
+
   Future<bool> _registrateByEmail(String login, String password) async {
     Response response = await http.post(
       ApiService.registrate,
       body: {
         "email": login,
+        "name": login,
         "password": password,
         "connpass": password,
+        "ip": await getIP(),
       },
     );
     if (response.statusCode == 200) {

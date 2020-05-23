@@ -5,6 +5,7 @@ import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../../data/models/item_models/epizode.dart';
 import '../../../data/models/item_models/movie.dart';
 import '../../../data/providers/services/api_service.dart';
+import '../profile_screen/widgets/info_dialog.dart';
 import 'widgets/coming_soon.dart';
 import 'widgets/epizode_scroller.dart';
 import 'widgets/movie_detail_header.dart';
@@ -13,71 +14,75 @@ import 'widgets/photo_scroller.dart';
 import 'widgets/play_button.dart';
 import 'widgets/story_line.dart';
 
-class MovieDetailScreen extends StatefulWidget {
+class MovieDetailScreen extends StatelessWidget {
   final Movie movie;
   MovieDetailScreen({@required this.movie});
-
-  @override
-  _MovieDetailScreenState createState() => _MovieDetailScreenState();
-}
-
-class _MovieDetailScreenState extends State<MovieDetailScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     bool isAllowed = context.bloc<AuthBloc>().isUserActive();
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MovieDetailHeader(widget.movie),
-            widget.movie.isMovie
-                ? _buildMovieControls(isAllowed)
-                : _buildSerialControls(isAllowed),
-            _buildPhotoScroller(widget.movie.screens),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: Storyline(widget.movie.detail),
-            ),
-            PeopleScroller(widget.movie.people),
-          ],
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthLogedIn)
+            showInfoDialog(context, 'добавлено в раздел смотреть позже');
+          if (state is AuthDetailError) showInfoDialog(context, state.message);
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MovieDetailHeader(movie),
+              movie.isMovie
+                  ? _buildMovieControls(isAllowed, context)
+                  : _buildSerialControls(isAllowed),
+              _buildPhotoScroller(movie.screens),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: Storyline(movie.detail),
+              ),
+              PeopleScroller(movie.people),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildMovieControls(isAllowed) {
+  Widget _buildMovieControls(isAllowed, context) {
     return Padding(
         padding: const EdgeInsets.only(left: 16.0, top: 12.0, right: 16.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             PlayButton(
-              movieTitle: widget.movie.title,
+              movieTitle: movie.title,
               iconData: Icons.play_arrow,
               title: 'Смотреть',
-              url: widget.movie.movieUrl,
+              url: movie.movieUrl,
               isAllowed: isAllowed,
             ),
             SizedBox(width: 12.0),
             PlayButton(
-              movieTitle: widget.movie.title,
+              movieTitle: movie.title,
               iconData: Icons.local_movies,
               title: 'Трейлер',
-              url: widget.movie.trailerUrl,
+              url: movie.trailerUrl,
               isAllowed: true,
             ),
             SizedBox(width: 12.0),
             IconButton(
               color: Colors.green,
               icon: Icon(Icons.turned_in),
-              onPressed: () {},
+              onPressed: () {
+                if (isAllowed) {
+                  BlocProvider.of<AuthBloc>(context).add(
+                    AddWatchLaterMovie(movie: movie),
+                  );
+                } else
+                  showInfoDialog(context, 'Доступ только по подписке');
+              },
             ),
           ],
         ));
@@ -85,7 +90,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
   Widget _buildSerialControls(isAllowed) {
     List<Widget> epizodes = [];
-    for (Epizode epizode in widget.movie.epizodes) {
+    for (Epizode epizode in movie.epizodes) {
       if (epizode.series.length == 0)
         epizodes.add(ComingSoon());
       else

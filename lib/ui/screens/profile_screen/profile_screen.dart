@@ -27,6 +27,7 @@ class ProfileScreen extends StatelessWidget {
         if (state is AuthLogedOut) return _buildLogedOut(context);
         if (state is AuthLogedIn) return _buildLogedIn(context, state.user);
         if (state is AuthError) return ErrorScreen(state.message);
+        if (state is AuthDetailError) _listenInitial(context);
         return ScreenLoading();
       },
     );

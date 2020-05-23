@@ -36,6 +36,7 @@ class _AuthScreenState extends State<AuthScreen> {
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if (state is AuthLoading) return ScreenLoading();
+
             return _buildDefault();
           },
         ),

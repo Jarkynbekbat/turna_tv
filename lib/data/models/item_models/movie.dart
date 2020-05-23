@@ -16,6 +16,7 @@ class Movie {
   String trailerUrl;
   String movieUrl;
 
+  int id;
   int age;
   int year;
   int categoryId;
@@ -35,6 +36,7 @@ class Movie {
     this.language,
     this.duration,
     this.budget,
+    this.id,
     this.age,
     this.year,
     this.categoryId,
@@ -64,6 +66,7 @@ class Movie {
     language = json['language'];
     duration = json['duration'];
     budget = json['budget'];
+    id = json['id'];
     age = json['age'];
     year = json['year'];
     categoryId = json['categoryId'];

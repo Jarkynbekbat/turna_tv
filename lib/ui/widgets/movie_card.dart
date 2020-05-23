@@ -27,17 +27,20 @@ class MovieCard extends StatelessWidget {
       },
       child: Stack(
         children: <Widget>[
-          Card(
-            elevation: 10,
-            child: Hero(
-              tag: Random.secure(),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: CachedNetworkImage(
-                  height: 180.0,
-                  imageUrl: ApiService.imgBase + movie.smallImgUrl,
-                  placeholder: (context, url) => CardShimmer(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: Card(
+              elevation: 10,
+              child: Hero(
+                tag: Random.secure(),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: CachedNetworkImage(
+                    height: 180.0,
+                    imageUrl: ApiService.imgBase + movie.smallImgUrl,
+                    placeholder: (context, url) => CardShimmer(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
               ),
             ),

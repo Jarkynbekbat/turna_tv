@@ -30,3 +30,8 @@ class AuthError extends AuthState {
   final String message;
   AuthError({this.message});
 }
+
+class AuthDetailError extends AuthState {
+  final String message;
+  AuthDetailError({this.message});
+}

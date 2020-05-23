@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:meta/meta.dart';
 
+import '../../data/models/item_models/movie.dart';
 import '../../data/models/item_models/user.dart';
 import '../../data/providers/services/local_user_service.dart';
 import '../../data/repositories/repository.dart';
@@ -26,6 +27,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is CheckUser) yield* _mapCheckUserToState();
     if (event is LoginByEmail) yield* _mapLoginByEmailToState(event);
     if (event is Logout) yield* _mapLogoutToState();
+    if (event is AddWatchLaterMovie) yield* _mapAddWatchLater(event);
+  }
+
+  Stream<AuthState> _mapAddWatchLater(AddWatchLaterMovie event) async* {
+    bool isContains = _repository.user.watchLaterMovies
+        .map((m) => m.id)
+        .contains(event.movie.id);
+    if (!isContains) {
+      await _repository.addWatchLaterMovie(event.movie.id);
+      yield AuthLogedIn(user: _repository.user);
+    } else {
+      yield AuthDetailError(
+          message: "Фильм уже добавлен в раздел смотреть позже");
+    }
+
+    print('object');
   }
 
   Stream<AuthState> _mapLogoutToState() async* {
