@@ -39,7 +39,7 @@ final page = PageViewModel(
   ),
   title: Text('Новинки кино'),
   mainImage: Image.asset(
-    './lib/presentation/assets/intro1.png',
+    'assets/intro1.png',
     height: 285.0,
     width: 285.0,
     alignment: Alignment.center,
@@ -57,7 +57,7 @@ final page2 = PageViewModel(
   ),
   title: Text('Сериалы'),
   mainImage: Image.asset(
-    './lib/presentation/assets/intro2.png',
+    'assets/intro2.png',
     height: 285.0,
     width: 285.0,
     alignment: Alignment.center,
@@ -75,7 +75,7 @@ final page3 = PageViewModel(
   ),
   title: Text('Спорт'),
   mainImage: Image.asset(
-    './lib/presentation/assets/intro3.png',
+    'assets/intro3.png',
     height: 300.0,
     width: 300.0,
     alignment: Alignment.center,

@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:meta/meta.dart';
-import 'package:turna_tv/data/providers/services/local_user_service.dart';
 
 import '../../data/models/item_models/user.dart';
+import '../../data/providers/services/local_user_service.dart';
 import '../../data/repositories/repository.dart';
+import '../../ui/screens/registration_screen/registration_screen.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -35,7 +37,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> _mapCheckUserToState() async* {
     try {
       User user = _repository.user;
-      print('object');
       if (user == null)
         yield AuthLogedOut();
       else
@@ -48,15 +49,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> _mapLoginByEmailToState(LoginByEmail event) async* {
     try {
       yield AuthLoading();
-      await _repository.initUserByEmail(event.email, event.password);
 
-      print('object');
-      yield AuthLogedIn(user: _repository.user);
+      if (EmailValidator.validate(event.email)) {
+        yield AuthLoading();
+        await _repository.initUserByEmail(event.email, event.password);
+        yield AuthLogedIn(user: _repository.user);
+      } else
+        yield AuthError(message: 'Убедитесь в правильности ввода');
     } catch (ex) {
-      if (ex.message == 488)
-        yield AuthNeedRegistration();
-      else if (ex.message == 401)
+      if (ex.message == 401)
         yield AuthError(message: 'Не правильный логин или пароль');
+      else if (ex.message[0] == 488)
+        yield AuthNeedRegistration(
+            login: ex.message[1],
+            password: ex.message[2],
+            type: RegistrationType.email);
       else
         yield AuthError(message: 'Что то пошло не так.. попробуйте снова..');
     }

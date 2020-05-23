@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turna_tv/ui/screens/profile_screen/profile_screen.dart';
 
 import 'ui/screens/auth_screen/auth_screen.dart';
 import 'ui/screens/home_screen/home_screen.dart';
@@ -40,4 +41,5 @@ ThemeData getTheme() {
 Map<String, WidgetBuilder> getRoutes() => <String, WidgetBuilder>{
       AuthScreen.route: (context) => AuthScreen(),
       HomeScreen.route: (context) => HomeScreen(),
+      ProfileScreen.route: (context) => ProfileScreen(),
     };

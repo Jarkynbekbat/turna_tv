@@ -7,4 +7,6 @@ class ApiService {
   static String genres = "$_base/genre/";
 
   static String user = "$_base/user/auth.php";
+
+  static String registrate = '$_base/user/register.php';
 }

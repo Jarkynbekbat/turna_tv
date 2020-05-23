@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:turna_tv/blocs/home_bloc/home_bloc.dart';
-import 'package:turna_tv/ui/screens/home_screen/home_screen.dart';
+
+import '../../blocs/home_bloc/home_bloc.dart';
 
 class ErrorScreen extends StatelessWidget {
   final String message;

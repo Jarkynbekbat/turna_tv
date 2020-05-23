@@ -19,23 +19,26 @@ class MovieGridScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GridView.count(
-          crossAxisCount: 3,
-          childAspectRatio: 3 / 4.5,
-          children: List.generate(
-            movies.length,
-            (i) => Container(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 188,
-                    child: MovieCard(movie: movies[i]),
+        child: movies.length != 0
+            ? GridView.count(
+                crossAxisCount: 3,
+                childAspectRatio: 3 / 4.5,
+                children: List.generate(
+                  movies.length,
+                  (i) => Container(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 188,
+                          child: MovieCard(movie: movies[i]),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ))
+            : Center(
+                child: Text('пусто...'),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }

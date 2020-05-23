@@ -1,3 +1,5 @@
+import 'package:turna_tv/ui/screens/registration_screen/registration_screen.dart';
+
 import '../models/item_models/category.dart';
 import '../models/item_models/genre.dart';
 import '../models/item_models/movie.dart';
@@ -33,12 +35,17 @@ class Repository {
 
   Future<bool> initUserByEmail(String email, String password) async {
     this.user = await _userProvider.getUserByEmail(email, password);
-
-    print("object");
-
     bool res = await LocalUserService.setUser(this.user);
+    return true;
+  }
 
-    print('object');
+  Future<bool> registrateUser(
+      String login, String password, RegistrationType type) async {
+    if (type == RegistrationType.email) {
+      await _userProvider.registrate(login, password, type);
+      await initUserByEmail(login, password);
+    }
+
     return true;
   }
 }

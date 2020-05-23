@@ -8,14 +8,14 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthNeedRegistration extends AuthState {
-  final String email;
-  final String phone;
+  final String login;
+  final RegistrationType type;
   final String password;
 
   AuthNeedRegistration({
-    this.email,
-    this.phone,
-    this.password,
+    @required this.login,
+    @required this.password,
+    @required this.type,
   });
 }
 

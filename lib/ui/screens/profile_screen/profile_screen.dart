@@ -11,11 +11,14 @@ import '../information_screen/information_screen.dart';
 import '../movie_grid_screen/movie_grid_screen.dart';
 import '../paymant_screen/paymant_screen.dart';
 import 'widgets/grid_button.dart';
+import 'widgets/info.dart';
 import 'widgets/info_block.dart';
 import 'widgets/info_dialog.dart';
 import 'widgets/makesure_dialog.dart';
 
 class ProfileScreen extends StatelessWidget {
+  static String route = "profile_screen";
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
@@ -34,88 +37,90 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildLogedIn(BuildContext context, User user) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(height: 30.0),
-          InfoBlock(
-            title: 'Профиль',
-            subtitle: user.name,
-            onClick: () {},
-          ),
-          SizedBox(height: 10.0),
-          InfoBlock(
-            title: 'Подписка',
-            subtitle: user.isActive
-                ? 'действует до ${user.isActiveBefore.toLocal()}'
-                : 'Подключить',
-            onClick: user.isActive ? () {} : () => _toPaymant(context),
-          ),
-          SizedBox(height: 10.0),
-          SizedBox(height: 20.0),
-          Row(
-            children: <Widget>[
-              GridButton(
-                title: 'Смотреть позже',
-                iconData: Icons.turned_in_not,
-                onClick: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MovieGridScreen(
-                        title: 'Смотреть позже',
-                        movies: user.watchLaterMovies,
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 30.0),
+            InfoBlock(
+              title: 'Профиль',
+              subtitle: user.name,
+              onClick: () {},
+            ),
+            SizedBox(height: 10.0),
+            InfoBlock(
+              title: 'Подписка',
+              subtitle: user.isActive
+                  ? 'действует до ${user.isActiveBefore.toLocal()}'
+                  : 'Подключить',
+              onClick: user.isActive ? () {} : () => _toPaymant(context),
+            ),
+            SizedBox(height: 10.0),
+            SizedBox(height: 20.0),
+            Row(
+              children: <Widget>[
+                GridButton(
+                  title: 'Смотреть позже',
+                  iconData: Icons.turned_in_not,
+                  onClick: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MovieGridScreen(
+                          title: 'Смотреть позже',
+                          movies: user.watchLaterMovies,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(width: 10.0),
-              GridButton(
-                title: 'Просмотры',
-                iconData: Icons.access_time,
-                onClick: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MovieGridScreen(
-                        title: 'Просмотры',
-                        movies: user.watchLaterMovies,
+                    );
+                  },
+                ),
+                SizedBox(width: 10.0),
+                GridButton(
+                  title: 'Просмотры',
+                  iconData: Icons.access_time,
+                  onClick: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MovieGridScreen(
+                          title: 'Просмотры',
+                          movies: user.watchLaterMovies,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          SizedBox(height: 10.0),
-          Row(
-            children: <Widget>[
-              GridButton(
-                title: 'Помощь',
-                iconData: Icons.help,
-                onClick: () => _toHelp(context),
-              ),
-              SizedBox(width: 10.0),
-              GridButton(
-                title: 'О нас',
-                iconData: Icons.info,
-                onClick: () => _toAboutUs(context),
-              ),
-            ],
-          ),
-          SizedBox(height: 20.0),
-          MyFlatButton(
-            title: 'Выйти',
-            onClick: () async {
-              bool res = await showMakesureDialog(
-                  context, 'Вы уверены что хотите выйти ?');
-              if (res) {
-                context.bloc<AuthBloc>().add(Logout());
-              }
-            },
-          )
-        ],
+                    );
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 10.0),
+            Row(
+              children: <Widget>[
+                GridButton(
+                  title: 'Помощь',
+                  iconData: Icons.help,
+                  onClick: () => _toHelp(context),
+                ),
+                SizedBox(width: 10.0),
+                GridButton(
+                  title: 'О нас',
+                  iconData: Icons.info,
+                  onClick: () => _toAboutUs(context),
+                ),
+              ],
+            ),
+            SizedBox(height: 20.0),
+            MyFlatButton(
+              title: 'Выйти',
+              onClick: () async {
+                bool res = await showMakesureDialog(
+                    context, 'Вы уверены что хотите выйти ?');
+                if (res) {
+                  context.bloc<AuthBloc>().add(Logout());
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }
@@ -209,8 +214,4 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
-  final String aboutUs = ''' О нас  ''';
-
-  final String help = ''' Помощь  ''';
 }
