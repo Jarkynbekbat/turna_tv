@@ -5,9 +5,8 @@ import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../../blocs/registration_bloc/registration_bloc.dart';
 import '../../widgets/my_flat_button.dart';
 import '../../widgets/screen_loading.dart';
-import '../auth_screen/auth_screen.dart';
-import '../information_screen/information_screen.dart';
-import '../profile_screen/widgets/error_dialog.dart';
+import '../information/information_screen.dart';
+import '../profile/widgets/error_dialog.dart';
 import 'widget/agreements.dart';
 
 enum RegistrationType { phone, email, google, facebook }

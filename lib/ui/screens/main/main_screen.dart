@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/bottom_navigation.dart';
-import '../category_screen/category_screen.dart';
-import '../home_screen/home_screen.dart';
-import '../profile_screen/profile_screen.dart';
-import '../search_screen/search_screen.dart';
+import '../category/category_screen.dart';
+import '../home/home_screen.dart';
+import '../profile/profile_screen.dart';
+import '../search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override

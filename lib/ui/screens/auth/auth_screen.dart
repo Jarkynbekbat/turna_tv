@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:turna_tv/ui/screens/profile_screen/profile_screen.dart';
 
 import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../widgets/my_flat_button.dart';
 import '../../widgets/screen_loading.dart';
-import '../profile_screen/widgets/error_dialog.dart';
-import '../registration_screen/registration_screen.dart';
+import '../profile/widgets/error_dialog.dart';
+import '../registration/registration_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   static String route = "auth";

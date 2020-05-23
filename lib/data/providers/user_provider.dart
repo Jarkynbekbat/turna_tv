@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:turna_tv/data/providers/services/device_info_service.dart';
 
-import '../../ui/screens/registration_screen/registration_screen.dart';
+import '../../ui/screens/registration/registration_screen.dart';
 import '../models/item_models/user.dart';
 import 'services/api_service.dart';
 

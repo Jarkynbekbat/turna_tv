@@ -9,8 +9,8 @@ import 'blocs/home_bloc/home_bloc.dart';
 import 'blocs/registration_bloc/registration_bloc.dart';
 import 'blocs/search_bloc/search_bloc.dart';
 import 'data/repositories/repository.dart';
-import 'ui/screens/intro_screen/intro_screen.dart';
-import 'ui/screens/main_screen/main_screen.dart';
+import 'ui/screens/intro/intro_screen.dart';
+import 'ui/screens/main/main_screen.dart';
 import 'ui/widgets/splash_screen.dart';
 
 class App extends StatelessWidget {

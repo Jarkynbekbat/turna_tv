@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/item_models/movie.dart';
 import '../../data/providers/services/api_service.dart';
-import '../screens/movie_detail_screen/movie_detail_screen.dart';
+import '../screens/movie_detail/movie_detail_screen.dart';
 import 'card_loading.dart';
 
 class MovieCard extends StatelessWidget {

@@ -19,6 +19,4 @@ class LoginByEmail extends AuthEvent {
   LoginByEmail({@required this.email, @required this.password});
 }
 
-class Logout extends AuthEvent {
-  // TODO сделать выход
-}
+class Logout extends AuthEvent {}

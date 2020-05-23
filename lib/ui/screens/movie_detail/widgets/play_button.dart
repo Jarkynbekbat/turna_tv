@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turna_tv/ui/screens/profile_screen/widgets/info_dialog.dart';
 
-import '../../video_player_screen/video_player.dart';
+import '../../profile/widgets/info_dialog.dart';
+import '../../video_player/video_player.dart';
 
 class PlayButton extends StatelessWidget {
   final String title;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 
-import '../auth_screen/auth_screen.dart';
+import '../auth/auth_screen.dart';
 
 class IntroScreen extends StatefulWidget {
   static String route = "intro_screen";

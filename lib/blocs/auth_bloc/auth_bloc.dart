@@ -8,7 +8,7 @@ import '../../data/models/item_models/movie.dart';
 import '../../data/models/item_models/user.dart';
 import '../../data/providers/services/local_user_service.dart';
 import '../../data/repositories/repository.dart';
-import '../../ui/screens/registration_screen/registration_screen.dart';
+import '../../ui/screens/registration/registration_screen.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:turna_tv/ui/screens/profile_screen/widgets/info_dialog.dart';
 
 import '../../../../data/models/item_models/epizode.dart';
 import '../../../../data/models/item_models/serie.dart';
 import '../../../../data/providers/services/api_service.dart';
-import '../../video_player_screen/video_player.dart';
+import '../../profile/widgets/info_dialog.dart';
+import '../../video_player/video_player.dart';
 
 class EpizodeScroller extends StatelessWidget {
   final Epizode epizode;

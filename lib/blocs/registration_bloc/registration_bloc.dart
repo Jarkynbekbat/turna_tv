@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/repositories/repository.dart';
-import '../../ui/screens/registration_screen/registration_screen.dart';
+import '../../ui/screens/registration/registration_screen.dart';
 
 part 'registration_event.dart';
 part 'registration_state.dart';

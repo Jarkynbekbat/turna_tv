@@ -1,4 +1,4 @@
-import '../../ui/screens/registration_screen/registration_screen.dart';
+import '../../ui/screens/registration/registration_screen.dart';
 import '../models/item_models/category.dart';
 import '../models/item_models/genre.dart';
 import '../models/item_models/movie.dart';
@@ -45,7 +45,7 @@ class Repository {
 
   Future<bool> initUserByEmail(String email, String password) async {
     this.user = await _userProvider.getUserByEmail(email, password);
-    bool res = await LocalUserService.setUser(this.user);
+    await LocalUserService.setUser(this.user);
     return true;
   }
 

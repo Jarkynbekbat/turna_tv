@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/item_models/movie.dart';
-import '../screens/movie_grid_screen/movie_grid_screen.dart';
+import '../screens/movie_grid/movie_grid_screen.dart';
 import 'movie_card.dart';
 
 class MovieHorizontalList extends StatelessWidget {

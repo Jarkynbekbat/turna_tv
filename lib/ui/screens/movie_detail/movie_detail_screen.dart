@@ -5,7 +5,7 @@ import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../../data/models/item_models/epizode.dart';
 import '../../../data/models/item_models/movie.dart';
 import '../../../data/providers/services/api_service.dart';
-import '../profile_screen/widgets/info_dialog.dart';
+import '../profile/widgets/info_dialog.dart';
 import 'widgets/coming_soon.dart';
 import 'widgets/epizode_scroller.dart';
 import 'widgets/movie_detail_header.dart';
