@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Poster extends StatelessWidget {
@@ -18,11 +19,12 @@ class Poster extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.circular(4.0),
       elevation: 2.0,
-      child: Image.network(
-        posterUrl,
-        fit: BoxFit.cover,
-        width: width,
+      child: CachedNetworkImage(
         height: height,
+        width: width,
+        fit: BoxFit.cover,
+        imageUrl: posterUrl,
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
   }
