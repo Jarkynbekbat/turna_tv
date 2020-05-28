@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "544358850032",
+    "firebase_url": "https://authturna.firebaseio.com",
+    "project_id": "authturna",
+    "storage_bucket": "authturna.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544358850032:android:2c8d04bbe98a505f325135",
+        "android_client_info": {
+          "package_name": "com.jb.turna_tv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544358850032-3p849cjkk6sqicm7fm58hpi6qktqi6pl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jb.turna_tv",
+            "certificate_hash": "51b7ef18222be91b370d2a66851ee6a42698b929"
+          }
+        },
+        {
+          "client_id": "544358850032-49g6hq5kea8r91jdm59kpn9p8fmi6ris.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmWVmbo-bpUUYEnkaTsC3qg9bZfaAUjpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544358850032-49g6hq5kea8r91jdm59kpn9p8fmi6ris.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

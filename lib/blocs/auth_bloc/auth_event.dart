@@ -19,4 +19,9 @@ class LoginByEmail extends AuthEvent {
   LoginByEmail({@required this.email, @required this.password});
 }
 
+class LoginByGoogle extends AuthEvent {
+  final GoogleSignInAccount account;
+  LoginByGoogle({@required this.account});
+}
+
 class Logout extends AuthEvent {}

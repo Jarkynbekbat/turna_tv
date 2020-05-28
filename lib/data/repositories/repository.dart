@@ -1,3 +1,5 @@
+import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../ui/screens/registration/registration_screen.dart';
 import '../models/item_models/category.dart';
 import '../models/item_models/genre.dart';
@@ -43,19 +45,42 @@ class Repository {
       return false;
   }
 
+  Future<bool> initUserGoogle(GoogleSignInAccount account) async {
+    this.user = await _userProvider.getUserByGoogle(account);
+    await LocalUserService.setUser(this.user);
+    return true;
+  }
+
   Future<bool> initUserByEmail(String email, String password) async {
     this.user = await _userProvider.getUserByEmail(email, password);
     await LocalUserService.setUser(this.user);
     return true;
   }
 
-  Future<bool> registrateUser(
-      String login, String password, RegistrationType type) async {
-    if (type == RegistrationType.email) {
-      await _userProvider.registrate(login, password, type);
-      await initUserByEmail(login, password);
-    }
+  Future<bool> registrateUser({
+    String login,
+    String password,
+    RegistrationType type,
+    GoogleSignInAccount account,
+  }) async {
+    if (type == RegistrationType.email)
+      await _registrateByEmail(login, password, type);
+    else if (type == RegistrationType.google)
+      await _registrateByGoogle(account, type);
 
     return true;
+  }
+
+  Future _registrateByGoogle(
+      GoogleSignInAccount account, RegistrationType type) async {
+    await _userProvider.registrate(account: account, type: type);
+    await initUserGoogle(account);
+  }
+
+  Future _registrateByEmail(
+      String login, String password, RegistrationType type) async {
+    await _userProvider.registrate(
+        login: login, password: password, type: type);
+    await initUserByEmail(login, password);
   }
 }

@@ -35,6 +35,7 @@ class RegistrationScreen extends StatelessWidget {
                 if (state is RegistrationLoading) return ScreenLoading();
                 if (state is RegistrationInitial)
                   return _buildAgreement(context, login);
+
                 if (state is RegistrationAgreed)
                   return _buildPasswordPart(context, login, type);
 

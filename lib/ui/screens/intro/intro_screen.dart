@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 
-import '../auth/auth_screen.dart';
+import '../home/home_screen.dart';
 
 class IntroScreen extends StatefulWidget {
   static String route = "intro_screen";
@@ -15,7 +15,7 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return IntroViewsFlutter(
       [page, page2, page3],
-      onTapDoneButton: () => Navigator.of(context).pushNamed(AuthScreen.route),
+      onTapDoneButton: () => Navigator.of(context).pushNamed(HomeScreen.route),
       showSkipButton: true,
       skipText:
           Text('ПРОПУСТИТЬ', style: TextStyle(fontWeight: FontWeight.bold)),

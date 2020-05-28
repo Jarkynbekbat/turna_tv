@@ -11,11 +11,13 @@ class AuthNeedRegistration extends AuthState {
   final String login;
   final RegistrationType type;
   final String password;
+  final GoogleSignInAccount account;
 
   AuthNeedRegistration({
-    @required this.login,
-    @required this.password,
+    this.login,
     @required this.type,
+    this.password,
+    this.account,
   });
 }
 

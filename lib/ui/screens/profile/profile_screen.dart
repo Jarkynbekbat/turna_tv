@@ -9,7 +9,7 @@ import '../../widgets/screen_loading.dart';
 import '../auth/auth_screen.dart';
 import '../information/information_screen.dart';
 import '../movie_grid/movie_grid_screen.dart';
-import '../paymant/paymant_screen.dart';
+import '../paymant/paymant_webview_screen.dart';
 import 'widgets/grid_button.dart';
 import 'widgets/info.dart';
 import 'widgets/info_block.dart';
@@ -53,10 +53,10 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: 10.0),
             InfoBlock(
               title: 'Подписка',
-              subtitle: user.isActive
+              subtitle: !user.isActive
                   ? 'действует до ${user.isActiveBefore.toLocal()}'
                   : 'Подключить',
-              onClick: user.isActive ? () {} : () => _toPaymant(context),
+              onClick: !user.isActive ? () {} : () => _toPaymant(context),
             ),
             SizedBox(height: 10.0),
             SizedBox(height: 20.0),
@@ -194,7 +194,7 @@ class ProfileScreen extends StatelessWidget {
   void _toPaymant(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PaymentScreen(),
+        builder: (context) => PaymantWebviewScreen(),
       ),
     );
   }

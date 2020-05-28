@@ -8,10 +8,13 @@ class Agree extends RegistrationEvent {}
 class Registrate extends RegistrationEvent {
   final String login;
   final String password;
+  final GoogleSignInAccount account;
+
   final RegistrationType type;
   Registrate({
-    @required this.login,
-    @required this.password,
+    this.login,
+    this.password,
+    this.account,
     @required this.type,
   });
 }

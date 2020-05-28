@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/repositories/repository.dart';
@@ -26,7 +27,12 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
 
   Stream<RegistrationState> _mapRegistrateToState(Registrate event) async* {
     try {
-      await _repository.registrateUser(event.login, event.password, event.type);
+      if (event.type == RegistrationType.email)
+        await _repository.registrateUser(
+            login: event.login, password: event.password, type: event.type);
+      else if (event.type == RegistrationType.google)
+        await _repository.registrateUser(
+            account: event.account, type: event.type);
 
       yield RegistrationCompleted();
     } catch (e) {

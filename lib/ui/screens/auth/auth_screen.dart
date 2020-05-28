@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:turna_tv/ui/screens/registration/social_accaunt_registration_screen.dart';
 
 import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../widgets/my_flat_button.dart';
@@ -48,6 +50,17 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _buildDefault() {
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: ['profile', 'email'],
+    );
+    googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+      if (account != null)
+        context.bloc<AuthBloc>().add(LoginByGoogle(account: account));
+      // account;
+      print('object');
+      googleSignIn.disconnect();
+    });
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(22.0),
@@ -62,7 +75,9 @@ class _AuthScreenState extends State<AuthScreen> {
             SignInButton(
               Buttons.GoogleDark,
               text: 'через google аккаунт',
-              onPressed: () {},
+              onPressed: () async {
+                await googleSignIn.signIn();
+              },
             ),
             SignInButton(
               Buttons.Facebook,
@@ -96,10 +111,32 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void _listenNeedRegist(BuildContext context, AuthNeedRegistration state) {
+    state;
+    print('object');
+
+    if (state.type == RegistrationType.google)
+      _goToGoogleRegistration(context, state);
+    else if (state.type == RegistrationType.email)
+      _goToEmailRegistration(context, state);
+  }
+
+  void _goToEmailRegistration(
+      BuildContext context, AuthNeedRegistration state) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => RegistrationScreen(
             login: state.login, type: RegistrationType.email),
+      ),
+    );
+  }
+
+  void _goToGoogleRegistration(
+      BuildContext context, AuthNeedRegistration state) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SocialAccauntRegistrationScreen(
+          googleSignInAccount: state.account,
+        ),
       ),
     );
   }

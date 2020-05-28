@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/models/item_models/movie.dart';
@@ -28,6 +29,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is LoginByEmail) yield* _mapLoginByEmailToState(event);
     if (event is Logout) yield* _mapLogoutToState();
     if (event is AddWatchLaterMovie) yield* _mapAddWatchLater(event);
+    if (event is LoginByGoogle) yield* _mapLoginByGoogleToState(event);
+  }
+
+  Stream<AuthState> _mapLoginByGoogleToState(LoginByGoogle event) async* {
+    try {
+      yield AuthLoading();
+      await _repository.initUserGoogle(event.account);
+      yield AuthLogedIn(user: _repository.user);
+      print('ssd');
+    } catch (e) {
+      if (e.message[0] == 488) {
+        print('ssd');
+        yield AuthNeedRegistration(
+            account: e.message[1], type: RegistrationType.google);
+      } else
+        yield AuthError(message: e.toString());
+    }
   }
 
   Stream<AuthState> _mapAddWatchLater(AddWatchLaterMovie event) async* {
@@ -73,13 +91,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthLogedIn(user: _repository.user);
       } else
         yield AuthError(message: 'Убедитесь в правильности ввода');
-    } catch (ex) {
-      if (ex.message == 401)
+    } catch (e) {
+      if (e.message == 401)
         yield AuthError(message: 'Не правильный логин или пароль');
-      else if (ex.message[0] == 488)
+      else if (e.message[0] == 488)
         yield AuthNeedRegistration(
-            login: ex.message[1],
-            password: ex.message[2],
+            login: e.message[1],
+            password: e.message[2],
             type: RegistrationType.email);
       else
         yield AuthError(message: 'Что то пошло не так.. попробуйте снова..');
