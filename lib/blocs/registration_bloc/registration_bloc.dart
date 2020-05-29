@@ -30,12 +30,15 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       if (event.type == RegistrationType.email)
         await _repository.registrateUser(
             login: event.login, password: event.password, type: event.type);
-      else if (event.type == RegistrationType.google)
+      else if (event.type == RegistrationType.google) {
+        print('object');
         await _repository.registrateUser(
             account: event.account, type: event.type);
+      }
 
       yield RegistrationCompleted();
     } catch (e) {
+      print('object');
       yield RegistrationError(message: e.toString());
     }
   }

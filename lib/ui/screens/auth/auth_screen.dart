@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:turna_tv/ui/screens/registration/social_accaunt_registration_screen.dart';
 
 import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../widgets/my_flat_button.dart';
@@ -111,9 +110,6 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void _listenNeedRegist(BuildContext context, AuthNeedRegistration state) {
-    state;
-    print('object');
-
     if (state.type == RegistrationType.google)
       _goToGoogleRegistration(context, state);
     else if (state.type == RegistrationType.email)
@@ -132,10 +128,12 @@ class _AuthScreenState extends State<AuthScreen> {
 
   void _goToGoogleRegistration(
       BuildContext context, AuthNeedRegistration state) {
+    print('object');
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SocialAccauntRegistrationScreen(
-          googleSignInAccount: state.account,
+        builder: (context) => RegistrationScreen(
+          account: state.account,
+          type: RegistrationType.google,
         ),
       ),
     );

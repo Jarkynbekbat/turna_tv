@@ -63,6 +63,7 @@ class Repository {
     RegistrationType type,
     GoogleSignInAccount account,
   }) async {
+    print('object');
     if (type == RegistrationType.email)
       await _registrateByEmail(login, password, type);
     else if (type == RegistrationType.google)
@@ -73,6 +74,7 @@ class Repository {
 
   Future _registrateByGoogle(
       GoogleSignInAccount account, RegistrationType type) async {
+    print('object');
     await _userProvider.registrate(account: account, type: type);
     await initUserGoogle(account);
   }

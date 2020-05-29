@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../../blocs/registration_bloc/registration_bloc.dart';
@@ -14,10 +15,13 @@ enum RegistrationType { phone, email, google, facebook }
 class RegistrationScreen extends StatelessWidget {
   final String login;
   final RegistrationType type;
-  RegistrationScreen({@required this.login, @required this.type});
+  final GoogleSignInAccount account;
+  RegistrationScreen({this.login, this.type, this.account});
 
   @override
   Widget build(BuildContext context) {
+    print('object');
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Регистрация"),
@@ -32,14 +36,18 @@ class RegistrationScreen extends StatelessWidget {
             },
             child: BlocBuilder<RegistrationBloc, RegistrationState>(
               builder: (context, state) {
+                print('object');
                 if (state is RegistrationLoading) return ScreenLoading();
-                if (state is RegistrationInitial)
-                  return _buildAgreement(context, login);
-
+                if (state is RegistrationInitial) {
+                  if (type == RegistrationType.email)
+                    return _builLogindAgreement(context, login);
+                  if (type == RegistrationType.google)
+                    return _buildGoogleAgreement(context, account);
+                }
                 if (state is RegistrationAgreed)
                   return _buildPasswordPart(context, login, type);
 
-                return _buildAgreement(context, login);
+                return _builLogindAgreement(context, login);
               },
             ),
           ),
@@ -51,16 +59,7 @@ class RegistrationScreen extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
-  _buildAgreement(context, login) {
-    _showContent(String title, String content, BuildContext context) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) =>
-              InformationScreen(title: title, content: content),
-        ),
-      );
-    }
-
+  _builLogindAgreement(context, login) {
     return Column(
       children: <Widget>[
         Text(
@@ -136,6 +135,62 @@ class RegistrationScreen extends StatelessWidget {
     );
   }
 
+  _buildGoogleAgreement(context, account) {
+    void _onContinue(BuildContext context) {
+      BlocProvider.of<RegistrationBloc>(context).add(
+        Registrate(
+          account: account,
+          type: RegistrationType.google,
+        ),
+      );
+    }
+
+    print('object');
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Для регистрации нам необходимо ваше согласие с правами и документами сервиса',
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 50.0),
+          ListTile(
+            leading: Icon(Icons.description),
+            title: Text(
+              'Политика конфиденциальности',
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            subtitle: Text(
+              'об использовании сервисом персональных данных',
+            ),
+            trailing: Icon(Icons.arrow_forward),
+            onTap: () => _showContent(
+                'Политика конфиденциальности', privacyPolitic, context),
+          ),
+          SizedBox(height: 20.0),
+          ListTile(
+            leading: Icon(Icons.description),
+            title: Text(
+              'Пользовательское соглашение',
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            subtitle: Text('о пользовании сервисом'),
+            trailing: Icon(Icons.arrow_forward),
+            onTap: () => _showContent(
+                'Пользовательское соглашение', userAgreement, context),
+          ),
+          SizedBox(height: 20.0),
+          MyFlatButton(
+            title: 'соглашаюсь,продолжить',
+            onClick: () => _onContinue(context),
+          ),
+        ],
+      ),
+    );
+  }
+
   _buildPasswordPart(context, login, type) {
     bool isValid(String password, String password2) {
       if (password != password2) return false;
@@ -206,6 +261,14 @@ class RegistrationScreen extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  _showContent(String title, String content, BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => InformationScreen(title: title, content: content),
       ),
     );
   }

@@ -90,6 +90,7 @@ class UserProvider {
   }
 
   Future<bool> _registrateByGoogle(GoogleSignInAccount account) async {
+    print('object');
     Response response = await http.post(
       ApiService.registrateByGoogle,
       body: {
@@ -101,10 +102,13 @@ class UserProvider {
       },
     );
     print('object');
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 401) {
       return true;
     } else
-      throw Exception('не удалось , проверьте интернет соединение!');
+      response;
+    print('sac');
+
+    throw Exception('не удалось , проверьте интернет соединение!');
   }
 
   // other
