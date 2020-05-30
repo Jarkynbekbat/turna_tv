@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:turna_tv/data/models/item_models/movie.dart';
 
 import '../../data/models/screen_models/home.dart';
 import '../../data/repositories/repository.dart';
@@ -22,6 +23,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeEvent event,
   ) async* {
     if (event is FetchHomeScreenData) yield* _fetchToState();
+  }
+
+  List<Movie> getMoviesByPersonId(int id) {
+    try {
+      return _repository.movies
+          .where((m) => m.people.map((p) => p.peopleId).contains(id))
+          .toList();
+    } catch (ex) {
+      return [];
+    }
   }
 
   Stream<HomeState> _fetchToState() async* {

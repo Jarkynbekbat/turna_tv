@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../blocs/home_bloc/home_bloc.dart';
+import '../../../../data/models/item_models/movie.dart';
 import '../../../../data/models/item_models/people.dart';
 import '../../../../data/providers/services/api_service.dart';
+import '../../movie_grid/movie_grid_screen.dart';
 
 class PeopleScroller extends StatelessWidget {
   PeopleScroller(this.people);
@@ -11,35 +15,47 @@ class PeopleScroller extends StatelessWidget {
   Widget _buildPerson(BuildContext context, int index) {
     var person = people[index];
 
-    return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
-      child: Column(
-        children: [
-          CircleAvatar(
-            backgroundImage: person.img == '/use/img/people.svg'
-                ? AssetImage('assets/placeholders/people.png')
-                : CachedNetworkImageProvider(ApiService.imgBase + person.img),
-            radius: 40.0,
+    return GestureDetector(
+      onTap: () {
+        List<Movie> filtred = BlocProvider.of<HomeBloc>(context)
+            .getMoviesByPersonId(person.peopleId);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) =>
+                MovieGridScreen(title: person.name, movies: filtred),
           ),
-          SizedBox(height: 4.0),
-          Text(
-            person.name,
-            style: Theme.of(context).textTheme.bodyText1,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 2.0),
-          Text(
-            person.postTitle,
-            style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  fontSize: 12.0,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .color
-                      .withOpacity(0.5),
-                ),
-          ),
-        ],
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(right: 16.0),
+        child: Column(
+          children: [
+            CircleAvatar(
+              backgroundImage: person.img == '/use/img/people.svg'
+                  ? AssetImage('assets/placeholders/people.png')
+                  : CachedNetworkImageProvider(ApiService.imgBase + person.img),
+              radius: 40.0,
+            ),
+            SizedBox(height: 4.0),
+            Text(
+              person.name,
+              style: Theme.of(context).textTheme.bodyText1,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 2.0),
+            Text(
+              person.postTitle,
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontSize: 12.0,
+                    color: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .color
+                        .withOpacity(0.5),
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }

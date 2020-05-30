@@ -102,7 +102,7 @@ class UserProvider {
       },
     );
     print('object');
-    if (response.statusCode == 200 || response.statusCode == 401) {
+    if (response.statusCode == 200) {
       return true;
     } else
       response;
