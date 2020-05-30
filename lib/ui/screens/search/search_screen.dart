@@ -83,6 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Future<List<Movie>> _search(String text, List<Movie> movies) async {
+    List<Movie> foundMovies = [];
     text = text.toLowerCase();
     if (text.length == 1) {
       return movies.where((el) => el.title.toLowerCase()[0] == text).toList();
@@ -94,6 +95,15 @@ class _SearchScreenState extends State<SearchScreen> {
               el.title.toLowerCase()[1] == text[1])
           .toList();
     }
-    return movies.where((el) => el.title.toLowerCase().contains(text)).toList();
+    foundMovies.addAll(
+      movies.where(
+        (el) =>
+            el.title.toLowerCase().contains(text) ||
+            el.people
+                .map((p) => p.name.toLowerCase().substring(0, text.length))
+                .contains(text),
+      ),
+    );
+    return foundMovies;
   }
 }
