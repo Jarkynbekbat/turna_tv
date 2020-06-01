@@ -44,9 +44,10 @@ class _SearchScreenState extends State<SearchScreen> {
         headerPadding: EdgeInsets.symmetric(horizontal: 10),
         listPadding: EdgeInsets.symmetric(horizontal: 10),
         onSearch: (title) => _search(title, state.model.movies),
-        hintText: "название фильма",
+        hintText: "название фильма, актер, режиссер",
         searchBarController: _searchBarController,
         // placeHolder:
+        onError: (error) => Text("Не найдено"),
         cancellationWidget: Text("Отмена"),
         emptyWidget: Text("Не найдено"),
         onCancelled: () {

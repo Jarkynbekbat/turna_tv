@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
+import 'package:turna_tv/ui/screens/main/main_screen.dart';
 
 import '../home/home_screen.dart';
 
@@ -15,7 +16,8 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return IntroViewsFlutter(
       [page, page2, page3],
-      onTapDoneButton: () => Navigator.of(context).pushNamed(HomeScreen.route),
+      onTapDoneButton: () =>
+          Navigator.of(context).pushReplacementNamed(MainScreen.route),
       showSkipButton: true,
       skipText:
           Text('ПРОПУСТИТЬ', style: TextStyle(fontWeight: FontWeight.bold)),

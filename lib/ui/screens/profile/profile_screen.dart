@@ -53,10 +53,10 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: 10.0),
             InfoBlock(
               title: 'Подписка',
-              subtitle: !user.isActive
+              subtitle: user.isActive
                   ? 'действует до ${user.isActiveBefore.toLocal()}'
                   : 'Подключить',
-              onClick: !user.isActive ? () {} : () => _toPaymant(context),
+              onClick: user.isActive ? () {} : () => _toPaymant(context),
             ),
             SizedBox(height: 10.0),
             SizedBox(height: 20.0),

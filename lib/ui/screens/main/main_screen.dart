@@ -7,6 +7,8 @@ import '../profile/profile_screen.dart';
 import '../search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
+  static String route = 'main_screen';
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
