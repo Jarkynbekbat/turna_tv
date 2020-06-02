@@ -46,6 +46,8 @@ class UserProvider {
 
     print('object');
     var jsonResponse = convert.jsonDecode(response.body);
+
+    print('object');
     if (jsonResponse == 488) throw Exception([jsonResponse, account]);
     if (jsonResponse == 401) throw Exception(jsonResponse);
     User user = User.fromJson(jsonResponse['AUTHORIZATION'][0]);
@@ -120,6 +122,22 @@ class UserProvider {
         "movieId": movieId.toString(),
       },
     );
+
+    if (response.statusCode == 200)
+      return true;
+    else
+      return false;
+  }
+
+  Future<bool> removeWatchLater(String token, int movieId) async {
+    Response response = await http.post(
+      ApiService.removeWatchLater,
+      body: {
+        "userToken": token,
+        "movieId": movieId.toString(),
+      },
+    );
+    print('object');
 
     if (response.statusCode == 200)
       return true;

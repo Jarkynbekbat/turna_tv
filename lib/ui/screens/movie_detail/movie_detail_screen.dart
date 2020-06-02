@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:turna_tv/blocs/movie_detail_bloc/movie_detail_bloc.dart';
 
 import '../../../blocs/auth_bloc/auth_bloc.dart';
 import '../../../data/models/item_models/epizode.dart';
@@ -23,11 +24,13 @@ class MovieDetailScreen extends StatelessWidget {
     bool isAllowed = context.bloc<AuthBloc>().isUserActive();
 
     return Scaffold(
-      body: BlocListener<AuthBloc, AuthState>(
+      body: BlocListener<MovieDetailBloc, MovieDetailState>(
         listener: (context, state) {
-          if (state is AuthLogedIn)
+          if (state is MovieDetailWatchLaterAdded)
             showInfoDialog(context, 'добавлено в раздел смотреть позже');
-          if (state is AuthDetailError) showInfoDialog(context, state.message);
+          if (state is MovieDetailWatchLaterRemoved)
+            showInfoDialog(context, 'удалено из раздела смотреть позже');
+          if (state is MovieDetailError) showInfoDialog(context, state.message);
         },
         child: SingleChildScrollView(
           child: Column(
@@ -51,6 +54,10 @@ class MovieDetailScreen extends StatelessWidget {
   }
 
   Widget _buildMovieControls(isAllowed, context) {
+    bool alreadyInWatchLater = BlocProvider.of<MovieDetailBloc>(context)
+        .hasMovieInWatchLater(movie.id);
+    print('object');
+
     return Padding(
         padding: const EdgeInsets.only(left: 16.0, top: 12.0, right: 16.0),
         child: Row(
@@ -73,13 +80,19 @@ class MovieDetailScreen extends StatelessWidget {
             ),
             SizedBox(width: 12.0),
             IconButton(
-              color: Colors.green,
+              color: alreadyInWatchLater ? Colors.green : Colors.white,
               icon: Icon(Icons.turned_in),
               onPressed: () {
                 if (isAllowed) {
-                  BlocProvider.of<AuthBloc>(context).add(
-                    AddWatchLaterMovie(movie: movie),
-                  );
+                  if (alreadyInWatchLater) {
+                    BlocProvider.of<MovieDetailBloc>(context).add(
+                      RemoveFromWatchLaterEvent(movie: movie),
+                    );
+                  } else {
+                    BlocProvider.of<MovieDetailBloc>(context).add(
+                      AddToWatchLaterEvent(movie: movie),
+                    );
+                  }
                 } else
                   showInfoDialog(context, 'Доступ только по подписке');
               },

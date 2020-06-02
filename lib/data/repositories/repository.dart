@@ -45,6 +45,18 @@ class Repository {
       return false;
   }
 
+  Future<bool> removeWatchLaterMovie(int movieId) async {
+    String token = user.token;
+
+    bool res = await _userProvider.removeWatchLater(token, movieId);
+    if (res) {
+      user.watchLaterMovies.removeWhere((m) => m.id == movieId);
+      LocalUserService.setUser(this.user);
+      return true;
+    } else
+      return false;
+  }
+
   Future<bool> initUserGoogle(GoogleSignInAccount account) async {
     this.user = await _userProvider.getUserByGoogle(account);
     await LocalUserService.setUser(this.user);

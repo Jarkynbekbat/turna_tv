@@ -28,7 +28,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is CheckUser) yield* _mapCheckUserToState();
     if (event is LoginByEmail) yield* _mapLoginByEmailToState(event);
     if (event is Logout) yield* _mapLogoutToState();
-    if (event is AddWatchLaterMovie) yield* _mapAddWatchLater(event);
     if (event is LoginByGoogle) yield* _mapLoginByGoogleToState(event);
   }
 
@@ -46,21 +45,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else
         yield AuthError(message: e.toString());
     }
-  }
-
-  Stream<AuthState> _mapAddWatchLater(AddWatchLaterMovie event) async* {
-    bool isContains = _repository.user.watchLaterMovies
-        .map((m) => m.id)
-        .contains(event.movie.id);
-    if (!isContains) {
-      await _repository.addWatchLaterMovie(event.movie.id);
-      yield AuthLogedIn(user: _repository.user);
-    } else {
-      yield AuthDetailError(
-          message: "Фильм уже добавлен в раздел смотреть позже");
-    }
-
-    print('object');
   }
 
   Stream<AuthState> _mapLogoutToState() async* {

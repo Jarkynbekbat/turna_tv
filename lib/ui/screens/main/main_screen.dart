@@ -25,15 +25,17 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: tabs[_currentIndex],
-      bottomNavigationBar: BottomNavigation(
-          currentIndex: _currentIndex,
-          onSelect: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          }),
+    return SafeArea(
+      child: Scaffold(
+        body: tabs[_currentIndex],
+        bottomNavigationBar: BottomNavigation(
+            currentIndex: _currentIndex,
+            onSelect: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            }),
+      ),
     );
   }
 }

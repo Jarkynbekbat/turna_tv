@@ -11,6 +11,7 @@ class BannersCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 8.0),
       color: Theme.of(context).scaffoldBackgroundColor,
       child: CarouselSlider(
         items:

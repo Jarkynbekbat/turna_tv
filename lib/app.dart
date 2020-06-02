@@ -1,6 +1,7 @@
 import 'package:first_time_screen/first_time_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:turna_tv/blocs/movie_detail_bloc/movie_detail_bloc.dart';
 
 import 'app_config.dart';
 import 'blocs/auth_bloc/auth_bloc.dart';
@@ -35,6 +36,10 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 RegistrationBloc(context.repository<Repository>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                MovieDetailBloc(context.repository<Repository>()),
           ),
         ],
         child: MaterialApp(

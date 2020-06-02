@@ -3,8 +3,6 @@ import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 import 'package:turna_tv/ui/screens/main/main_screen.dart';
 
-import '../home/home_screen.dart';
-
 class IntroScreen extends StatefulWidget {
   static String route = "intro_screen";
   @override

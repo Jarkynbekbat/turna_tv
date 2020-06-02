@@ -12,6 +12,13 @@ class AddWatchLaterMovie extends AuthEvent {
   });
 }
 
+class RemoveWatchLaterMovie extends AuthEvent {
+  final Movie movie;
+  RemoveWatchLaterMovie({
+    @required this.movie,
+  });
+}
+
 class LoginByEmail extends AuthEvent {
   final String email;
   final String password;

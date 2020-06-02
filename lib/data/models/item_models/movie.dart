@@ -114,6 +114,7 @@ class Movie {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['title'] = this.title;
+    data['id'] = this.id;
     data['detail'] = this.detail;
     data['language'] = this.language;
     data['duration'] = this.duration;

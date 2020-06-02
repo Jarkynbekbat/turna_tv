@@ -12,6 +12,7 @@ class ApiService {
   static String registrateByEmail = '$_base/user/register.php';
   static String registrateByGoogle = '$_base/user/google-register.php';
 
-  //other
+  //watch later
   static String addWatchLater = "$_base/user/favourite.php";
+  static String removeWatchLater = "$_base/user/favourite-delete.php";
 }
