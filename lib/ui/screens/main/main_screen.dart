@@ -8,6 +8,8 @@ import '../search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
   static String route = 'main_screen';
+  int index;
+  MainScreen({this.index});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -25,6 +27,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _currentIndex = widget.index ?? _currentIndex;
     return SafeArea(
       child: Scaffold(
         body: tabs[_currentIndex],
@@ -32,6 +35,7 @@ class _MainScreenState extends State<MainScreen> {
             currentIndex: _currentIndex,
             onSelect: (index) {
               setState(() {
+                widget.index = null;
                 _currentIndex = index;
               });
             }),

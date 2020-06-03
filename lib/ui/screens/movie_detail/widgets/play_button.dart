@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../profile/widgets/info_dialog.dart';
+import '../../main/main_screen.dart';
 import '../../video_player/video_player.dart';
 
 class PlayButton extends StatelessWidget {
@@ -28,9 +28,8 @@ class PlayButton extends StatelessWidget {
     return MaterialButton(
       minWidth: MediaQuery.of(context).size.width / 100 * 35,
       color: Theme.of(context).accentColor,
-      onPressed: isAllowed
-          ? () => _playVideo(context)
-          : () => showInfoDialog(context, 'Доступ только по подписке'),
+      onPressed:
+          isAllowed ? () => _playVideo(context) : () => _goToProfile(context),
       child: Row(
         children: <Widget>[
           Icon(iconData, color: iconColor),
@@ -43,6 +42,12 @@ class PlayButton extends StatelessWidget {
   void _playVideo(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => VideoPlayerPage(title: movieTitle, url: url),
+    ));
+  }
+
+  void _goToProfile(BuildContext context) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => MainScreen(index: 3),
     ));
   }
 }

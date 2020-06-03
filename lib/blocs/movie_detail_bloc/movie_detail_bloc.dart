@@ -48,9 +48,6 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   }
 
   bool hasMovieInWatchLater(int movieId) {
-    _repository.user.watchLaterMovies;
-
-    print('object');
     if (_repository.user.watchLaterMovies.isNotEmpty)
       return _repository.user.watchLaterMovies
           .map((m) => m.id)

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:turna_tv/blocs/movie_detail_bloc/movie_detail_bloc.dart';
 
 import '../../../blocs/auth_bloc/auth_bloc.dart';
+import '../../../blocs/movie_detail_bloc/movie_detail_bloc.dart';
 import '../../../data/models/item_models/epizode.dart';
 import '../../../data/models/item_models/movie.dart';
 import '../../../data/providers/services/api_service.dart';
@@ -54,8 +54,10 @@ class MovieDetailScreen extends StatelessWidget {
   }
 
   Widget _buildMovieControls(isAllowed, context) {
-    bool alreadyInWatchLater = BlocProvider.of<MovieDetailBloc>(context)
-        .hasMovieInWatchLater(movie.id);
+    bool alreadyInWatchLater = false;
+    if (isAllowed)
+      alreadyInWatchLater = BlocProvider.of<MovieDetailBloc>(context)
+          .hasMovieInWatchLater(movie.id);
     print('object');
 
     return Padding(
@@ -66,7 +68,7 @@ class MovieDetailScreen extends StatelessWidget {
             PlayButton(
               movieTitle: movie.title,
               iconData: Icons.play_arrow,
-              title: 'Смотреть',
+              title: isAllowed ? 'Смотреть' : 'Подписаться',
               url: movie.movieUrl,
               isAllowed: isAllowed,
             ),
@@ -80,7 +82,7 @@ class MovieDetailScreen extends StatelessWidget {
             ),
             SizedBox(width: 12.0),
             IconButton(
-              color: alreadyInWatchLater ? Colors.green : Colors.white,
+              color: Colors.green,
               icon: Icon(Icons.turned_in),
               onPressed: () {
                 if (isAllowed) {
