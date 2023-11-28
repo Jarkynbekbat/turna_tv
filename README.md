@@ -1,5 +1,5 @@
 # turna_tv
-Movie streaming app 
+"Turna TV" is a cutting-edge movie streaming app designed with a sleek and user-friendly interface. It features a vast library of movies across various genres, catering to diverse tastes.
 
 ## UI
 
